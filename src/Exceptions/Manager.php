@@ -1,6 +1,6 @@
 <?php
 
-namespace CashierProvider\BankName\Technology\Exceptions;
+namespace CashierProvider\Tinkoff\Credit\Exceptions;
 
 use CashierProvider\Core\Exceptions\Http\BankInternalErrorException;
 use CashierProvider\Core\Exceptions\Http\BuyerNotFoundClientException;

@@ -5,7 +5,7 @@ namespace Tests\Responses;
 use CashierProvider\Core\Http\Response as BaseResponse;
 use DragonCode\Contracts\Cashier\Http\Response;
 use Tests\TestCase;
-use CashierProvider\BankName\Technology\Responses\Created;
+use CashierProvider\Tinkoff\Credit\Responses\Created;
 
 class InitTest extends TestCase
 {

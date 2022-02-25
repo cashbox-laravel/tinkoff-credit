@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\BankName\Technology\Responses;
+namespace CashierProvider\Tinkoff\Credit\Responses;
 
 use CashierProvider\Core\Http\Response;
 
 class State extends Response
 {
     protected $map = [
-        self::KEY_EXTERNAL_ID => 'PaymentId',
+        self::KEY_EXTERNAL_ID => 'id',
 
-        self::KEY_STATUS => 'Status',
+        self::KEY_STATUS => 'status',
     ];
 
     public function isEmpty(): bool

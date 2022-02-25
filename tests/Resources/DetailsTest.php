@@ -5,7 +5,7 @@ namespace Tests\Resources;
 use CashierProvider\Core\Resources\Details as BaseDetails;
 use DragonCode\Contracts\Cashier\Resources\Details as DetailsContract;
 use Tests\TestCase;
-use CashierProvider\BankName\Technology\Resources\Details;
+use CashierProvider\Tinkoff\Credit\Resources\Details;
 
 class DetailsTest extends TestCase
 {

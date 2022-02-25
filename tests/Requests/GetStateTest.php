@@ -6,7 +6,7 @@ use CashierProvider\Core\Http\Request;
 use DragonCode\Contracts\Cashier\Http\Request as RequestContract;
 use DragonCode\Contracts\Http\Builder;
 use Tests\TestCase;
-use CashierProvider\BankName\Technology\Requests\GetState;
+use CashierProvider\Tinkoff\Credit\Requests\GetState;
 
 class GetStateTest extends TestCase
 {

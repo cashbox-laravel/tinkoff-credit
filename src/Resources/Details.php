@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\BankName\Technology\Resources;
+namespace CashierProvider\Tinkoff\Credit\Resources;
 
 use CashierProvider\Core\Resources\Details as BaseDetails;
 

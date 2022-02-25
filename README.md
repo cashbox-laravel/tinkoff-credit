@@ -1,6 +1,6 @@
-# BankName Technology Cashier Driver
+# Tinkoff Credit
 
-![cashier provider driver template](https://preview.dragon-code.pro/cashier-provider/driver-template.svg?brand=laravel)
+![cashier provider driver template](https://preview.dragon-code.pro/cashier-provider/tinkoff-credit.svg?brand=laravel)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
@@ -10,10 +10,10 @@
 
 ## Installation
 
-To get the latest version of `BankName Technology Cashier Driver`, simply require the project using [Composer](https://getcomposer.org):
+To get the latest version of `Tinkoff Credit`, simply require the project using [Composer](https://getcomposer.org):
 
 ```bash
-$ composer require cashier-provider/bankname-technology
+$ composer require cashier-provider/tinkoff-credit
 ```
 
 Or manually update `require` block of `composer.json` and run `composer update`.
@@ -21,7 +21,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "cashier-provider/bankname-technology": "^2.0"
+        "cashier-provider/tinkoff-credit": "^1.0"
     }
 }
 ```
@@ -32,7 +32,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 >
 > This project is the driver for [`Cashier Provider`](https://github.com/cashier-provider/core).
 >
-> Terminal Key and Secret must be provided by the bank manager in response to the agreement concluded with the bank.
+> Shop ID and Show Case ID must be provided by the bank manager in response to the agreement concluded with the bank.
 
 
 ### Configuration
@@ -41,24 +41,25 @@ Add your driver information to the `config/cashier.php` file:
 
 ```php
 use App\Models\Payment;
-use App\Payments\BankName as BankNameDetails;
-use CashierProvider\BankName\Technology\Driver as BankNameDriver;
+use App\Payments\Tinkoff as TinkoffDetails;
 use CashierProvider\Core\Constants\Driver;
+use CashierProvider\Tinkoff\Credit\Driver as TinkoffCreditDriver;
 
 return [
     'payment' => [
         'map' => [
-            Payment::TYPE_BANK_NAME => 'driver_name'
+            Payment::TYPE_TINKOFF_CREDIT => 'tinkoff_credit'
         ]
     ],
 
     'drivers' => [
-        'driver_name' => [
-            Driver::DRIVER  => BankNameDriver::class,
-            Driver::DETAILS => BankNameDetails::class,
+        'tinkoff_credit' => [
+            Driver::DRIVER  => TinkoffCreditDriver::class,
+            Driver::DETAILS => TinkoffDetails::class,
 
-            Driver::CLIENT_ID       => env('CASHIER_BANK_TECHNOLOGY_CLIENT_ID'),
-            Driver::CLIENT_SECRET   => env('CASHIER_BANK_TECHNOLOGY_CLIENT_SECRET'),
+            'shop_id'      => env('CASHIER_TINKOFF_CREDIT_SHOP_ID'),
+            'show_case_id' => env('CASHIER_TINKOFF_CREDIT_SHOW_CASE_ID'),
+            'promocode'    => env('CASHIER_TINKOFF_CREDIT_PROMOCODE', 'default'),
         ]
     ]
 ];
@@ -169,7 +170,7 @@ To get a link, contact him through the cast:
 ```php
 use App\Models\Payment;
 
-public function getTechnology(Payment $payment): string
+public function getCredit(Payment $payment): string
 {
     return $payment->cashier->details->getUrl();
 }

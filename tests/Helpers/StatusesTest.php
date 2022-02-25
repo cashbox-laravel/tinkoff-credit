@@ -3,8 +3,8 @@
 namespace Tests\Helpers;
 
 use Tests\TestCase;
-use CashierProvider\BankName\Technology\Helpers\Statuses;
-use CashierProvider\BankName\Technology\Resources\Details;
+use CashierProvider\Tinkoff\Credit\Helpers\Statuses;
+use CashierProvider\Tinkoff\Credit\Resources\Details;
 
 class StatusesTest extends TestCase
 {

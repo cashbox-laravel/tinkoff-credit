@@ -5,7 +5,7 @@ namespace Tests\Responses;
 use CashierProvider\Core\Http\Response as BaseResponse;
 use DragonCode\Contracts\Cashier\Http\Response;
 use Tests\TestCase;
-use CashierProvider\BankName\Technology\Responses\State;
+use CashierProvider\Tinkoff\Credit\Responses\State;
 
 class StateTest extends TestCase
 {

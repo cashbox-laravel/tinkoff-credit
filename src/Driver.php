@@ -1,17 +1,17 @@
 <?php
 
-namespace CashierProvider\BankName\Technology;
+namespace CashierProvider\Tinkoff\Credit;
 
-use CashierProvider\BankName\Technology\Exceptions\Manager;
-use CashierProvider\BankName\Technology\Helpers\Statuses;
-use CashierProvider\BankName\Technology\Requests\Cancel;
-use CashierProvider\BankName\Technology\Requests\GetState;
-use CashierProvider\BankName\Technology\Requests\Init;
-use CashierProvider\BankName\Technology\Resources\Details;
-use CashierProvider\BankName\Technology\Responses\Created;
-use CashierProvider\BankName\Technology\Responses\Refund;
-use CashierProvider\BankName\Technology\Responses\State;
 use CashierProvider\Core\Services\Driver as BaseDriver;
+use CashierProvider\Tinkoff\Credit\Exceptions\Manager;
+use CashierProvider\Tinkoff\Credit\Helpers\Statuses;
+use CashierProvider\Tinkoff\Credit\Requests\Cancel;
+use CashierProvider\Tinkoff\Credit\Requests\GetState;
+use CashierProvider\Tinkoff\Credit\Requests\Init;
+use CashierProvider\Tinkoff\Credit\Resources\Details;
+use CashierProvider\Tinkoff\Credit\Responses\Created;
+use CashierProvider\Tinkoff\Credit\Responses\Refund;
+use CashierProvider\Tinkoff\Credit\Responses\State;
 use DragonCode\Contracts\Cashier\Http\Response;
 
 class Driver extends BaseDriver

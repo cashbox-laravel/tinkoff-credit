@@ -9,7 +9,7 @@ use DragonCode\Contracts\Cashier\Http\Response as ResponseContract;
 use DragonCode\Support\Facades\Http\Url;
 use Illuminate\Database\Eloquent\Model;
 use Tests\Fixtures\Models\RequestPayment;
-use CashierProvider\BankName\Technology\Driver as Technology;
+use CashierProvider\Tinkoff\Credit\Driver as Credit;
 
 class DriverTest extends TestCase
 {
@@ -75,6 +75,6 @@ class DriverTest extends TestCase
     {
         $config = $this->config();
 
-        return Technology::make($config, $payment);
+        return Credit::make($config, $payment);
     }
 }

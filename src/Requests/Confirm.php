@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace CashierProvider\Tinkoff\Credit\Requests;
 
-class GetState extends BaseRequest
+class Confirm extends BaseRequest
 {
-    protected $path = '/api/partners/v2/orders/{orderNumber}/info';
+    protected $path = '/api/partners/v2/orders/{orderNumber}/commit';
 
     public function getRawBody(): array
     {

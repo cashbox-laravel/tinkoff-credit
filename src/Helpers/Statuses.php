@@ -1,34 +1,26 @@
 <?php
 
-namespace CashierProvider\BankName\Technology\Helpers;
+namespace CashierProvider\Tinkoff\Credit\Helpers;
 
 use CashierProvider\Core\Services\Statuses as BaseStatus;
 
 class Statuses extends BaseStatus
 {
     public const NEW = [
-        'FORM_SHOWED',
-        'NEW',
+        'new',
     ];
 
-    public const REFUNDING = [
-        'REFUNDING',
-    ];
+    public const REFUNDING = [];
 
     public const REFUNDED = [
-        'PARTIAL_REFUNDED',
-        'REFUNDED',
-        'REVERSED',
+        'canceled',
     ];
 
     public const FAILED = [
-        'ATTEMPTS_EXPIRED',
-        'CANCELED',
-        'DEADLINE_EXPIRED',
-        'REJECTED',
+        'rejected',
     ];
 
     public const SUCCESS = [
-        'CONFIRMED',
+        'approved',
     ];
 }

@@ -6,6 +6,7 @@ use CashierProvider\Core\Config\Driver as DriverConfig;
 use CashierProvider\Core\Constants\Driver as DriverConstant;
 use CashierProvider\Core\Facades\Config\Payment as PaymentConfig;
 use CashierProvider\Core\Models\CashierDetail;
+use CashierProvider\Tinkoff\Credit\Driver;
 use DragonCode\Contracts\Cashier\Http\Request;
 use DragonCode\Contracts\Cashier\Resources\Details;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -15,7 +16,6 @@ use Tests\Concerns\Database;
 use Tests\Concerns\TestServiceProvider;
 use Tests\Fixtures\Models\ReadyPayment;
 use Tests\Fixtures\Resources\Model;
-use CashierProvider\BankName\Technology\Driver;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -99,7 +99,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * @param  \CashierProvider\BankName\Technology\Requests\BaseRequest|string  $request
+     * @param \CashierProvider\Tinkoff\Credit\Requests\BaseRequest|string $request
      *
      * @return \DragonCode\Contracts\Cashier\Http\Request
      */

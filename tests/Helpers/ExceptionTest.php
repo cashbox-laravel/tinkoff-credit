@@ -9,7 +9,7 @@ use CashierProvider\Core\Exceptions\Http\ContactTheSellerClientException;
 use DragonCode\Contracts\Http\Builder as HttpBuilder;
 use DragonCode\Support\Facades\Http\Builder;
 use Tests\TestCase;
-use CashierProvider\BankName\Technology\Exceptions\Manager;
+use CashierProvider\Tinkoff\Credit\Exceptions\Manager;
 
 class ExceptionTest extends TestCase
 {

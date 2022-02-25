@@ -2,19 +2,15 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\BankName\Technology\Requests;
+namespace CashierProvider\Tinkoff\Credit\Requests;
 
-use CashierProvider\Core\Facades\Config\Main;
 use CashierProvider\Core\Http\Request;
-use CashierProvider\BankName\Auth\Auth;
 
 abstract class BaseRequest extends Request
 {
-    protected $production_host = 'https://api.example.com';
+    protected $production_host = 'https://forma.tinkoff.ru';
 
-    protected $dev_host = 'https://dev.api.example.com';
-
-    protected $auth = Auth::class;
+    protected $dev_host = 'https://forma.tinkoff.ru';
 
     public function getRawHeaders(): array
     {
@@ -24,22 +20,8 @@ abstract class BaseRequest extends Request
         ];
     }
 
-    public function getHttpOptions(): array
+    protected function getPath(): ?string
     {
-        if (Main::isProduction()) {
-            $cert = $this->getCertificateData();
-
-            return compact('cert');
-        }
-
-        return [];
-    }
-
-    protected function getCertificateData(): array
-    {
-        return [
-            $this->model->getCertificatePath(),
-            $this->model->getCertificatePassword(),
-        ];
+        return str_replace('{orderNumber}', $this->model->getExternalId(), $this->path);
     }
 }
