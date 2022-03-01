@@ -57,7 +57,7 @@ return [
             Driver::DRIVER  => TinkoffCreditDriver::class,
             Driver::DETAILS => TinkoffDetails::class,
 
-            'shop_id'      => env('CASHIER_TINKOFF_CREDIT_SHOP_ID'),
+            'shop_id'      => env('CASHIER_TINKOFF_CREDIT_CLIENT_ID'),
             'show_case_id' => env('CASHIER_TINKOFF_CREDIT_SHOW_CASE_ID'),
             'promocode'    => env('CASHIER_TINKOFF_CREDIT_PROMOCODE', 'default'),
         ]

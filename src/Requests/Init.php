@@ -8,11 +8,15 @@ class Init extends BaseRequest
 {
     protected $path = '/api/partners/v2/orders/create';
 
+    protected $path_dev = '/api/partners/v2/orders/create-demo';
+
+    protected $hash = false;
+
     public function getRawBody(): array
     {
         return [
-            'shopId'     => $this->model->getShopId(),
-            'showcaseId' => $this->model->getShowCaseId(),
+            'shopId'     => $this->model->getClientId(),
+            'showcaseId' => $this->model->getClientSecret(),
             'promoCode'  => $this->model->getPromoCode(),
 
             'sum' => $this->model->getSum(),
@@ -38,16 +42,11 @@ class Init extends BaseRequest
 
     protected function getItems(): array
     {
-        $items = [];
+        return $this->model->getItems()->each->only(['name', 'quantity', 'price'])->toArray();
+    }
 
-        foreach ($this->model->getItems() as $item) {
-            $items[] = [
-                'name'     => $item->title,
-                'quantity' => $item->quantity,
-                'price'    => $item->price,
-            ];
-        }
-
-        return $items;
+    protected function getPath(): ?string
+    {
+        return $this->getUri();
     }
 }

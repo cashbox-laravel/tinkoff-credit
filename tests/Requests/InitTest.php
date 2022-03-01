@@ -3,10 +3,11 @@
 namespace Tests\Requests;
 
 use CashierProvider\Core\Http\Request;
+use CashierProvider\Tinkoff\Credit\Requests\Init;
 use DragonCode\Contracts\Cashier\Http\Request as RequestContract;
 use DragonCode\Contracts\Http\Builder;
+use Lmc\HttpConstants\Header;
 use Tests\TestCase;
-use CashierProvider\Tinkoff\Credit\Requests\Init;
 
 class InitTest extends TestCase
 {
@@ -25,7 +26,7 @@ class InitTest extends TestCase
 
         $this->assertInstanceOf(Builder::class, $request->uri());
 
-        $this->assertSame('https://dev.api-bank-uri.com/api/create', $request->uri()->toUrl());
+        $this->assertSame("https://forma.tinkoff.ru/api/partners/v2/orders/createDemo", $request->uri()->toUrl());
     }
 
     public function testHeaders()
@@ -35,8 +36,8 @@ class InitTest extends TestCase
         $this->assertIsArray($request->headers());
 
         $this->assertSame([
-            'Accept'       => 'application/json',
-            'Content-Type' => 'application/json',
+            Header::ACCEPT       => 'application/json',
+            Header::CONTENT_TYPE => 'application/json',
         ], $request->headers());
     }
 
@@ -47,8 +48,8 @@ class InitTest extends TestCase
         $this->assertIsArray($request->getRawHeaders());
 
         $this->assertSame([
-            'Accept'       => 'application/json',
-            'Content-Type' => 'application/json',
+            Header::ACCEPT       => 'application/json',
+            Header::CONTENT_TYPE => 'application/json',
         ], $request->getRawHeaders());
     }
 
@@ -59,12 +60,33 @@ class InitTest extends TestCase
         $this->assertIsArray($request->body());
 
         $this->assertSame([
-            'OrderId'  => self::PAYMENT_ID,
-            'Amount'   => self::PAYMENT_SUM_FORMATTED,
-            'Currency' => self::CURRENCY_FORMATTED,
+            'shopId'     => $this->getTerminalKey(),
+            'showcaseId' => $this->getTerminalSecret(),
+            'promoCode'  => $this->getPromoCode(),
 
-            'TerminalKey' => $this->getTerminalKey(),
-            'Token'       => $this->getTerminalSecret(),
+            'sum' => self::PAYMENT_SUM,
+
+            'orderNumber' => self::PAYMENT_ID,
+
+            'values' => [
+                'contact' => [
+                    'fio'         => [
+                        'lastName'   => self::USER_LAST_NAME,
+                        'firstName'  => self::USER_FIRST_NAME,
+                        'middleName' => self::USER_MIDDLE_NAME,
+                    ],
+                    'mobilePhone' => self::USER_PHONE,
+                    'email'       => self::USER_EMAIL,
+                ],
+            ],
+
+            'items' => [
+                [
+                    'name'     => self::ORDER_ITEM_TITLE,
+                    'quantity' => 1,
+                    'price'    => self::PAYMENT_SUM,
+                ],
+            ],
         ], $request->body());
     }
 
@@ -75,9 +97,33 @@ class InitTest extends TestCase
         $this->assertIsArray($request->getRawBody());
 
         $this->assertSame([
-            'OrderId'  => self::PAYMENT_ID,
-            'Amount'   => self::PAYMENT_SUM_FORMATTED,
-            'Currency' => self::CURRENCY_FORMATTED,
+            'shopId'     => $this->getTerminalKey(),
+            'showcaseId' => $this->getTerminalSecret(),
+            'promoCode'  => $this->getPromoCode(),
+
+            'sum' => self::PAYMENT_SUM,
+
+            'orderNumber' => self::PAYMENT_ID,
+
+            'values' => [
+                'contact' => [
+                    'fio'         => [
+                        'lastName'   => self::USER_LAST_NAME,
+                        'firstName'  => self::USER_FIRST_NAME,
+                        'middleName' => self::USER_MIDDLE_NAME,
+                    ],
+                    'mobilePhone' => self::USER_PHONE,
+                    'email'       => self::USER_EMAIL,
+                ],
+            ],
+
+            'items' => [
+                [
+                    'name'     => self::ORDER_ITEM_TITLE,
+                    'quantity' => 1,
+                    'price'    => self::PAYMENT_SUM,
+                ],
+            ],
         ], $request->getRawBody());
     }
 }

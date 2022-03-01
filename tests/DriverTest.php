@@ -4,12 +4,12 @@ namespace Tests;
 
 use CashierProvider\Core\Http\Response;
 use CashierProvider\Core\Services\Jobs;
+use CashierProvider\Tinkoff\Credit\Driver as Credit;
 use DragonCode\Contracts\Cashier\Driver as DriverContract;
 use DragonCode\Contracts\Cashier\Http\Response as ResponseContract;
 use DragonCode\Support\Facades\Http\Url;
 use Illuminate\Database\Eloquent\Model;
 use Tests\Fixtures\Models\RequestPayment;
-use CashierProvider\Tinkoff\Credit\Driver as Credit;
 
 class DriverTest extends TestCase
 {
@@ -25,7 +25,7 @@ class DriverTest extends TestCase
         $this->assertInstanceOf(ResponseContract::class, $response);
 
         $this->assertIsString($response->getExternalId());
-        $this->assertMatchesRegularExpression('/^(\d+)$/', $response->getExternalId());
+        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $response->getExternalId());
 
         $this->assertNull($response->getStatus());
 

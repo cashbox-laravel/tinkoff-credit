@@ -3,15 +3,16 @@
 namespace Tests\Resources;
 
 use CashierProvider\Core\Resources\Details as BaseDetails;
+use CashierProvider\Tinkoff\Credit\Resources\Details;
 use DragonCode\Contracts\Cashier\Resources\Details as DetailsContract;
 use Tests\TestCase;
-use CashierProvider\Tinkoff\Credit\Resources\Details;
 
 class DetailsTest extends TestCase
 {
     protected $expected = [
         'status' => self::STATUS,
         'url'    => self::URL,
+        'token'  => self::TOKEN,
     ];
 
     public function testMake()
@@ -28,6 +29,13 @@ class DetailsTest extends TestCase
         $details = $this->details();
 
         $this->assertSame(self::URL, $details->getUrl());
+    }
+
+    public function testGetToken()
+    {
+        $details = $this->details();
+
+        $this->assertSame(self::TOKEN, $details->getToken());
     }
 
     public function testGetStatus()

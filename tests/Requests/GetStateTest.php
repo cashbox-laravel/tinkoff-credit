@@ -3,10 +3,11 @@
 namespace Tests\Requests;
 
 use CashierProvider\Core\Http\Request;
+use CashierProvider\Tinkoff\Credit\Requests\GetState;
 use DragonCode\Contracts\Cashier\Http\Request as RequestContract;
 use DragonCode\Contracts\Http\Builder;
+use Lmc\HttpConstants\Header;
 use Tests\TestCase;
-use CashierProvider\Tinkoff\Credit\Requests\GetState;
 
 class GetStateTest extends TestCase
 {
@@ -25,7 +26,9 @@ class GetStateTest extends TestCase
 
         $this->assertInstanceOf(Builder::class, $request->uri());
 
-        $this->assertSame('https://dev.api-bank-uri.com/api/status', $request->uri()->toUrl());
+        $external_id = self::PAYMENT_EXTERNAL_ID;
+
+        $this->assertSame("https://forma.tinkoff.ru/api/partners/v2/orders/{$external_id}/info", $request->uri()->toUrl());
     }
 
     public function testHeaders()
@@ -35,8 +38,8 @@ class GetStateTest extends TestCase
         $this->assertIsArray($request->headers());
 
         $this->assertSame([
-            'Accept'       => 'application/json',
-            'Content-Type' => 'application/json',
+            Header::ACCEPT       => 'application/json',
+            Header::CONTENT_TYPE => 'application/json',
         ], $request->headers());
     }
 
@@ -47,8 +50,8 @@ class GetStateTest extends TestCase
         $this->assertIsArray($request->getRawHeaders());
 
         $this->assertSame([
-            'Accept'       => 'application/json',
-            'Content-Type' => 'application/json',
+            Header::ACCEPT       => 'application/json',
+            Header::CONTENT_TYPE => 'application/json',
         ], $request->getRawHeaders());
     }
 
@@ -59,11 +62,7 @@ class GetStateTest extends TestCase
         $this->assertIsArray($request->body());
 
         $this->assertSame([
-            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
-
-            'TerminalKey' => $this->getTerminalKey(),
-
-            'Token' => 'dbcbdf5539c35132b63c1b54e0f107cc96e71cf96040ba54dec5e140255b2e63',
+            'orderNumber' => self::PAYMENT_EXTERNAL_ID,
         ], $request->body());
     }
 
@@ -74,7 +73,7 @@ class GetStateTest extends TestCase
         $this->assertIsArray($request->getRawBody());
 
         $this->assertSame([
-            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
+            'orderNumber' => self::PAYMENT_EXTERNAL_ID,
         ], $request->getRawBody());
     }
 }

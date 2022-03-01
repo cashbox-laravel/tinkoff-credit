@@ -7,20 +7,20 @@ use CashierProvider\Core\Services\Statuses as BaseStatus;
 class Statuses extends BaseStatus
 {
     public const NEW = [
-        'new',
+        'NEW',
     ];
 
     public const REFUNDING = [];
 
     public const REFUNDED = [
-        'canceled',
+        'CANCELED',
     ];
 
     public const FAILED = [
-        'rejected',
+        'REJECTED',
     ];
 
     public const SUCCESS = [
-        'approved',
+        'APPROVED',
     ];
 }

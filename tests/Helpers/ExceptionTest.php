@@ -6,10 +6,10 @@ use CashierProvider\Core\Exceptions\Http\BadRequestClientException;
 use CashierProvider\Core\Exceptions\Http\BaseException;
 use CashierProvider\Core\Exceptions\Http\BuyerNotFoundClientException;
 use CashierProvider\Core\Exceptions\Http\ContactTheSellerClientException;
+use CashierProvider\Tinkoff\Credit\Exceptions\Manager;
 use DragonCode\Contracts\Http\Builder as HttpBuilder;
 use DragonCode\Support\Facades\Http\Builder;
 use Tests\TestCase;
-use CashierProvider\Tinkoff\Credit\Exceptions\Manager;
 
 class ExceptionTest extends TestCase
 {

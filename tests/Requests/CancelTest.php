@@ -3,10 +3,11 @@
 namespace Tests\Requests;
 
 use CashierProvider\Core\Http\Request;
+use CashierProvider\Tinkoff\Credit\Requests\Cancel;
 use DragonCode\Contracts\Cashier\Http\Request as RequestContract;
 use DragonCode\Contracts\Http\Builder;
+use Lmc\HttpConstants\Header;
 use Tests\TestCase;
-use CashierProvider\Tinkoff\Credit\Requests\Cancel;
 
 class CancelTest extends TestCase
 {
@@ -25,7 +26,9 @@ class CancelTest extends TestCase
 
         $this->assertInstanceOf(Builder::class, $request->uri());
 
-        $this->assertSame('https://dev.api-bank-uri.com/api/cancel', $request->uri()->toUrl());
+        $external_id = self::PAYMENT_EXTERNAL_ID;
+
+        $this->assertSame("https://forma.tinkoff.ru/api/partners/v2/orders/{$external_id}/cancel", $request->uri()->toUrl());
     }
 
     public function testHeaders()
@@ -35,8 +38,8 @@ class CancelTest extends TestCase
         $this->assertIsArray($request->headers());
 
         $this->assertSame([
-            'Accept'       => 'application/json',
-            'Content-Type' => 'application/json',
+            Header::ACCEPT       => 'application/json',
+            Header::CONTENT_TYPE => 'application/json',
         ], $request->headers());
     }
 
@@ -47,8 +50,8 @@ class CancelTest extends TestCase
         $this->assertIsArray($request->getRawHeaders());
 
         $this->assertSame([
-            'Accept'       => 'application/json',
-            'Content-Type' => 'application/json',
+            Header::ACCEPT       => 'application/json',
+            Header::CONTENT_TYPE => 'application/json',
         ], $request->getRawHeaders());
     }
 
@@ -59,12 +62,7 @@ class CancelTest extends TestCase
         $this->assertIsArray($request->body());
 
         $this->assertSame([
-            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
-            'Amount'    => self::PAYMENT_SUM_FORMATTED,
-
-            'TerminalKey' => $this->getTerminalKey(),
-
-            'Token' => '8473d8d4cafb9ec63071e9050c05e0dd1178fc8e1f3c765ffef7ec7fb5fcb758',
+            'orderNumber' => self::PAYMENT_EXTERNAL_ID,
         ], $request->body());
     }
 
@@ -75,8 +73,7 @@ class CancelTest extends TestCase
         $this->assertIsArray($request->getRawBody());
 
         $this->assertSame([
-            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
-            'Amount'    => self::PAYMENT_SUM_FORMATTED,
+            'orderNumber' => self::PAYMENT_EXTERNAL_ID,
         ], $request->getRawBody());
     }
 }

@@ -3,9 +3,9 @@
 namespace Tests\Responses;
 
 use CashierProvider\Core\Http\Response as BaseResponse;
+use CashierProvider\Tinkoff\Credit\Responses\Created;
 use DragonCode\Contracts\Cashier\Http\Response;
 use Tests\TestCase;
-use CashierProvider\Tinkoff\Credit\Responses\Created;
 
 class InitTest extends TestCase
 {
@@ -43,14 +43,8 @@ class InitTest extends TestCase
     protected function response(): Response
     {
         return Created::make([
-            'TerminalKey' => $this->getTerminalKey(),
-
-            'Amount'    => self::PAYMENT_SUM_FORMATTED,
-            'OrderId'   => self::PAYMENT_ID,
-            'Success'   => true,
-            'Status'    => self::STATUS,
-            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
-            'ErrorCode' => 0,
+            'id'   => self::PAYMENT_EXTERNAL_ID,
+            'link' => self::URL,
         ]);
     }
 }

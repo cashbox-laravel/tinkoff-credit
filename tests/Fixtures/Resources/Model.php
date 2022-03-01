@@ -4,10 +4,40 @@ namespace Tests\Fixtures\Resources;
 
 use CashierProvider\Core\Resources\Model as BaseModel;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
+use Tests\Fixtures\Models\OrderItem;
+use Tests\Fixtures\Models\User;
 
 /** @property \Tests\Fixtures\Models\ReadyPayment $model */
 class Model extends BaseModel
 {
+    public function getPromocode(): ?string
+    {
+        return config('cashier.drivers.tinkoff_credit.promocode');
+    }
+
+    public function getToken(): ?string
+    {
+        $this->resolveCashier($this->model);
+
+        return $this->model->cashier->details->getToken();
+    }
+
+    public function getClient(): User
+    {
+        return new User();
+    }
+
+    public function getItems(): Collection
+    {
+        return collect([new OrderItem()]);
+    }
+
+    public function getSum(): int
+    {
+        return (int) $this->sum();
+    }
+
     protected function paymentId(): string
     {
         return $this->model->uuid;

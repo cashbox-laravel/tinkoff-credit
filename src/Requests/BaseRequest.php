@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace CashierProvider\Tinkoff\Credit\Requests;
 
+use CashierProvider\Core\Facades\Config\Main;
 use CashierProvider\Core\Http\Request;
+use Lmc\HttpConstants\Header;
 
 abstract class BaseRequest extends Request
 {
@@ -12,16 +14,34 @@ abstract class BaseRequest extends Request
 
     protected $dev_host = 'https://forma.tinkoff.ru';
 
+    protected $headers = [
+        Header::ACCEPT       => 'application/json',
+        Header::CONTENT_TYPE => 'application/json',
+    ];
+
     public function getRawHeaders(): array
     {
+        return $this->hash ? array_merge($this->headers, $this->getAuthHeaders()) : $this->headers;
+    }
+
+    protected function getAuthHeaders(): array
+    {
         return [
-            'Accept'       => 'application/json',
-            'Content-Type' => 'application/json',
+            Header::AUTHORIZATION => 'Basic ' . $this->model->getToken(),
         ];
     }
 
     protected function getPath(): ?string
     {
-        return str_replace('{orderNumber}', $this->model->getExternalId(), $this->path);
+        return str_replace('{orderNumber}', $this->model->getExternalId(), $this->getUri());
+    }
+
+    protected function getUri(): string
+    {
+        if (Main::isProduction()) {
+            return $this->path;
+        }
+
+        return $this->path_dev ?? $this->path;
     }
 }

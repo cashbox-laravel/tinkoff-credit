@@ -25,9 +25,9 @@ abstract class TestCase extends BaseTestCase
 
     public const PAYMENT_ID = '1234567890';
 
-    public const PAYMENT_SUM = 12.34;
+    public const PAYMENT_SUM = 6000.34;
 
-    public const PAYMENT_SUM_FORMATTED = 1234;
+    public const PAYMENT_SUM_FORMATTED = 600034;
 
     public const CURRENCY = 643;
 
@@ -41,9 +41,23 @@ abstract class TestCase extends BaseTestCase
 
     public const URL = 'https://example.com';
 
+    public const TOKEN = 'eyJjb250YWN0Ijp7ImZpbyI6eyJsYXN0TmFtZSI6IkRvZS';
+
     public const MODEL_TYPE_ID = 123;
 
     public const MODEL_STATUS_ID = 0;
+
+    public const USER_FIRST_NAME = 'John';
+
+    public const USER_MIDDLE_NAME = 'Michael';
+
+    public const USER_LAST_NAME = 'Doe';
+
+    public const USER_PHONE = '+79123456789';
+
+    public const USER_EMAIL = 'john@example.com';
+
+    public const ORDER_ITEM_TITLE = 'Item Name';
 
     protected function getPackageProviders($app): array
     {
@@ -61,15 +75,17 @@ abstract class TestCase extends BaseTestCase
         $config->set('cashier.payment.model', $this->model);
 
         $config->set('cashier.payment.map', [
-            self::MODEL_TYPE_ID => 'driver_name',
+            self::MODEL_TYPE_ID => 'tinkoff_credit',
         ]);
 
-        $config->set('cashier.drivers.driver_name', [
+        $config->set('cashier.drivers.tinkoff_credit', [
             DriverConstant::DRIVER  => Driver::class,
             DriverConstant::DETAILS => Model::class,
 
-            DriverConstant::CLIENT_ID     => env('CASHIER_BANK_TECHNOLOGY_CLIENT_ID'),
-            DriverConstant::CLIENT_SECRET => env('CASHIER_BANK_TECHNOLOGY_CLIENT_SECRET'),
+            DriverConstant::CLIENT_ID     => env('CASHIER_TINKOFF_CREDIT_CLIENT_ID'),
+            DriverConstant::CLIENT_SECRET => env('CASHIER_TINKOFF_CREDIT_SHOW_CASE_ID'),
+
+            'promocode' => env('CASHIER_TINKOFF_CREDIT_PROMOCODE'),
         ]);
     }
 
@@ -117,18 +133,23 @@ abstract class TestCase extends BaseTestCase
 
     protected function config(): DriverConfig
     {
-        $config = config('cashier.drivers.driver_name');
+        $config = config('cashier.drivers.tinkoff_credit');
 
         return DriverConfig::make($config);
     }
 
     protected function getTerminalKey(): string
     {
-        return config('cashier.drivers.driver_name.client_id');
+        return config('cashier.drivers.tinkoff_credit.client_id');
     }
 
     protected function getTerminalSecret(): string
     {
-        return config('cashier.drivers.driver_name.client_secret');
+        return config('cashier.drivers.tinkoff_credit.client_secret');
+    }
+
+    protected function getPromoCode(): string
+    {
+        return config('cashier.drivers.tinkoff_credit.promocode');
     }
 }
