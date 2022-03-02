@@ -26,7 +26,7 @@ class InitTest extends TestCase
 
         $this->assertInstanceOf(Builder::class, $request->uri());
 
-        $this->assertSame("https://forma.tinkoff.ru/api/partners/v2/orders/create-demo", $request->uri()->toUrl());
+        $this->assertSame('https://forma.tinkoff.ru/api/partners/v2/orders/create-demo', $request->uri()->toUrl());
     }
 
     public function testHeaders()

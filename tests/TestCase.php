@@ -89,7 +89,7 @@ abstract class TestCase extends BaseTestCase
         ]);
     }
 
-    protected function model(Details $details = null): ReadyPayment
+    protected function model(?Details $details = null): ReadyPayment
     {
         $model = PaymentConfig::getModel();
 
