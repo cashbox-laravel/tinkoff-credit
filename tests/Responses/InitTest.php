@@ -36,6 +36,7 @@ class InitTest extends TestCase
         $response = $this->response();
 
         $this->assertSame([
+            Created::KEY_URL         => self::URL,
             BaseResponse::KEY_STATUS => self::STATUS,
         ], $response->toArray());
     }

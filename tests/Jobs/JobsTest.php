@@ -32,7 +32,7 @@ class JobsTest extends TestCase
         $this->assertSame(1, DB::table('cashier_details')->count());
 
         $this->assertIsString($payment->cashier->external_id);
-        $this->assertMatchesRegularExpression('/^(\d+)$/', $payment->cashier->external_id);
+        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $payment->cashier->external_id);
 
         $this->assertTrue(Url::is($payment->cashier->details->getUrl()));
 
@@ -60,7 +60,7 @@ class JobsTest extends TestCase
         $this->assertSame(1, DB::table('cashier_details')->count());
 
         $this->assertIsString($payment->cashier->external_id);
-        $this->assertMatchesRegularExpression('/^(\d+)$/', $payment->cashier->external_id);
+        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $payment->cashier->external_id);
 
         $this->assertTrue(Url::is($payment->cashier->details->getUrl()));
 
@@ -93,7 +93,7 @@ class JobsTest extends TestCase
         $this->assertSame(1, DB::table('cashier_details')->count());
 
         $this->assertIsString($payment->cashier->external_id);
-        $this->assertMatchesRegularExpression('/^(\d+)$/', $payment->cashier->external_id);
+        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $payment->cashier->external_id);
 
         $this->assertSame('CANCELED', $payment->cashier->details->getStatus());
 

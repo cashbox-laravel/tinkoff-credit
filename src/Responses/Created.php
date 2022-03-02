@@ -21,8 +21,20 @@ class Created extends Response
         return $this->value(self::KEY_URL);
     }
 
+    public function getStatus(): ?string
+    {
+        return 'NEW';
+    }
+
     public function isEmpty(): bool
     {
         return empty($this->getExternalId()) || empty($this->getUrl());
+    }
+
+    public function toArray(): array
+    {
+        return array_merge(parent::toArray(), [
+            self::KEY_STATUS => $this->getStatus(),
+        ]);
     }
 }

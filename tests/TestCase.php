@@ -41,8 +41,6 @@ abstract class TestCase extends BaseTestCase
 
     public const URL = 'https://example.com';
 
-    public const TOKEN = 'eyJjb250YWN0Ijp7ImZpbyI6eyJsYXN0TmFtZSI6IkRvZS';
-
     public const MODEL_TYPE_ID = 123;
 
     public const MODEL_STATUS_ID = 0;

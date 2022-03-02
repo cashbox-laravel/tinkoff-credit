@@ -44,7 +44,7 @@ class DriverTest extends TestCase
         $this->assertInstanceOf(ResponseContract::class, $response);
 
         $this->assertIsString($response->getExternalId());
-        $this->assertMatchesRegularExpression('/^(\d+)$/', $response->getExternalId());
+        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $response->getExternalId());
 
         $this->assertSame('FORM_SHOWED', $response->getStatus());
 
@@ -66,7 +66,7 @@ class DriverTest extends TestCase
         $this->assertInstanceOf(ResponseContract::class, $response);
 
         $this->assertIsString($response->getExternalId());
-        $this->assertMatchesRegularExpression('/^(\d+)$/', $response->getExternalId());
+        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $response->getExternalId());
 
         $this->assertSame('CANCELED', $response->getStatus());
     }

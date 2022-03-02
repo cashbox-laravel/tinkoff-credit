@@ -26,7 +26,7 @@ class InitTest extends TestCase
 
         $this->assertInstanceOf(Builder::class, $request->uri());
 
-        $this->assertSame("https://forma.tinkoff.ru/api/partners/v2/orders/createDemo", $request->uri()->toUrl());
+        $this->assertSame("https://forma.tinkoff.ru/api/partners/v2/orders/create-demo", $request->uri()->toUrl());
     }
 
     public function testHeaders()
@@ -64,7 +64,7 @@ class InitTest extends TestCase
             'showcaseId' => $this->getShowCaseId(),
             'promoCode'  => $this->getPromoCode(),
 
-            'sum' => self::PAYMENT_SUM,
+            'sum' => (int) self::PAYMENT_SUM,
 
             'orderNumber' => self::PAYMENT_ID,
 
@@ -84,7 +84,7 @@ class InitTest extends TestCase
                 [
                     'name'     => self::ORDER_ITEM_TITLE,
                     'quantity' => 1,
-                    'price'    => self::PAYMENT_SUM,
+                    'price'    => (int) self::PAYMENT_SUM,
                 ],
             ],
         ], $request->body());
@@ -101,7 +101,7 @@ class InitTest extends TestCase
             'showcaseId' => $this->getShowCaseId(),
             'promoCode'  => $this->getPromoCode(),
 
-            'sum' => self::PAYMENT_SUM,
+            'sum' => (int) self::PAYMENT_SUM,
 
             'orderNumber' => self::PAYMENT_ID,
 
@@ -121,7 +121,7 @@ class InitTest extends TestCase
                 [
                     'name'     => self::ORDER_ITEM_TITLE,
                     'quantity' => 1,
-                    'price'    => self::PAYMENT_SUM,
+                    'price'    => (int) self::PAYMENT_SUM,
                 ],
             ],
         ], $request->getRawBody());
