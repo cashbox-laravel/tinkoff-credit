@@ -27,7 +27,8 @@ abstract class BaseRequest extends Request
     protected function getAuthHeaders(): array
     {
         return [
-            Header::AUTHORIZATION => 'Basic ' . $this->model->getToken(),
+            Header::AUTHORIZATION => 'Basic ' . $this->model->getClientId() . ':' . $this->model->getClientSecret(),
+            //Header::AUTHORIZATION => 'Basic ' . base64_encode($this->model->getClientId() . ':' . $this->model->getClientSecret()),
         ];
     }
 

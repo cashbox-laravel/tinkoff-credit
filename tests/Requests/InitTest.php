@@ -60,8 +60,8 @@ class InitTest extends TestCase
         $this->assertIsArray($request->body());
 
         $this->assertSame([
-            'shopId'     => $this->getTerminalKey(),
-            'showcaseId' => $this->getTerminalSecret(),
+            'shopId'     => $this->getClientId(),
+            'showcaseId' => $this->getShowCaseId(),
             'promoCode'  => $this->getPromoCode(),
 
             'sum' => self::PAYMENT_SUM,
@@ -97,8 +97,8 @@ class InitTest extends TestCase
         $this->assertIsArray($request->getRawBody());
 
         $this->assertSame([
-            'shopId'     => $this->getTerminalKey(),
-            'showcaseId' => $this->getTerminalSecret(),
+            'shopId'     => $this->getClientId(),
+            'showcaseId' => $this->getShowCaseId(),
             'promoCode'  => $this->getPromoCode(),
 
             'sum' => self::PAYMENT_SUM,

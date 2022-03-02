@@ -43,7 +43,7 @@ class RefundTest extends TestCase
     protected function response(): Response
     {
         return Refund::make([
-            'TerminalKey' => $this->getTerminalKey(),
+            'TerminalKey' => $this->getClientId(),
 
             'Success'   => true,
             'Status'    => self::STATUS,

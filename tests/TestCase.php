@@ -83,7 +83,9 @@ abstract class TestCase extends BaseTestCase
             DriverConstant::DETAILS => Model::class,
 
             DriverConstant::CLIENT_ID     => env('CASHIER_TINKOFF_CREDIT_CLIENT_ID'),
-            DriverConstant::CLIENT_SECRET => env('CASHIER_TINKOFF_CREDIT_SHOW_CASE_ID'),
+            DriverConstant::CLIENT_SECRET => env('CASHIER_TINKOFF_CREDIT_PASSWORD'),
+
+            'show_case_id' => env('CASHIER_TINKOFF_CREDIT_SHOW_CASE_ID'),
 
             'promocode' => env('CASHIER_TINKOFF_CREDIT_PROMOCODE'),
         ]);
@@ -138,14 +140,14 @@ abstract class TestCase extends BaseTestCase
         return DriverConfig::make($config);
     }
 
-    protected function getTerminalKey(): string
+    protected function getClientId(): string
     {
         return config('cashier.drivers.tinkoff_credit.client_id');
     }
 
-    protected function getTerminalSecret(): string
+    protected function getShowCaseId(): string
     {
-        return config('cashier.drivers.tinkoff_credit.client_secret');
+        return config('cashier.drivers.tinkoff_credit.show_case_id');
     }
 
     protected function getPromoCode(): string

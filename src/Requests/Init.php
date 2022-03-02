@@ -10,13 +10,11 @@ class Init extends BaseRequest
 
     protected $path_dev = '/api/partners/v2/orders/create-demo';
 
-    protected $hash = false;
-
     public function getRawBody(): array
     {
         return [
             'shopId'     => $this->model->getClientId(),
-            'showcaseId' => $this->model->getClientSecret(),
+            'showcaseId' => $this->model->getShowCaseId(),
             'promoCode'  => $this->model->getPromoCode(),
 
             'sum' => $this->model->getSum(),

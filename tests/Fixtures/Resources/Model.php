@@ -11,16 +11,14 @@ use Tests\Fixtures\Models\User;
 /** @property \Tests\Fixtures\Models\ReadyPayment $model */
 class Model extends BaseModel
 {
+    public function getShowCaseId(): ?string
+    {
+        return config('cashier.drivers.tinkoff_credit.show_case_id');
+    }
+
     public function getPromocode(): ?string
     {
         return config('cashier.drivers.tinkoff_credit.promocode');
-    }
-
-    public function getToken(): ?string
-    {
-        $this->resolveCashier($this->model);
-
-        return $this->model->cashier->details->getToken();
     }
 
     public function getClient(): User
