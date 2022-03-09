@@ -36,8 +36,10 @@ jobs:
 
             -   name: Store environment variables
                 run: |
-                    echo "CASHIER_BANK_TECHNOLOGY_CLIENT_ID=${{ secrets.CASHIER_BANK_TECHNOLOGY_CLIENT_ID }}" >> .env
-                    echo "CASHIER_BANK_TECHNOLOGY_CLIENT_SECRET=${{ secrets.CASHIER_BANK_TECHNOLOGY_CLIENT_SECRET }}" >> .env
+                    echo "CASHIER_TINKOFF_CREDIT_CLIENT_ID=${{ secrets.CASHIER_TINKOFF_CREDIT_CLIENT_ID }}" >> .env
+                    echo "CASHIER_TINKOFF_CREDIT_PASSWORD=${{ secrets.CASHIER_TINKOFF_CREDIT_PASSWORD }}" >> .env
+                    echo "CASHIER_TINKOFF_CREDIT_PROMOCODE=${{ secrets.CASHIER_TINKOFF_CREDIT_PROMOCODE }}" >> .env
+                    echo "CASHIER_TINKOFF_CREDIT_SHOW_CASE_ID=${{ secrets.CASHIER_TINKOFF_CREDIT_SHOW_CASE_ID }}" >> .env
 
             -   name: Install dependencies
                 run: composer require laravel/framework:^${{ matrix.laravel }} --prefer-stable --prefer-dist --no-progress --no-interaction
