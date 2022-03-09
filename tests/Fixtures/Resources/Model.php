@@ -16,7 +16,7 @@ class Model extends BaseModel
         return config('cashier.drivers.tinkoff_credit.show_case_id');
     }
 
-    public function getPromocode(): ?string
+    public function getPromoCode(): ?string
     {
         return config('cashier.drivers.tinkoff_credit.promocode');
     }

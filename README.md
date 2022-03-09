@@ -57,7 +57,9 @@ return [
             Driver::DRIVER  => TinkoffCreditDriver::class,
             Driver::DETAILS => TinkoffDetails::class,
 
-            'shop_id'      => env('CASHIER_TINKOFF_CREDIT_CLIENT_ID'),
+            DriverConstant::CLIENT_ID     => env('CASHIER_TINKOFF_CREDIT_CLIENT_ID'),
+            DriverConstant::CLIENT_SECRET => env('CASHIER_TINKOFF_CREDIT_PASSWORD'),
+
             'show_case_id' => env('CASHIER_TINKOFF_CREDIT_SHOW_CASE_ID'),
             'promocode'    => env('CASHIER_TINKOFF_CREDIT_PROMOCODE', 'default'),
         ]
@@ -74,57 +76,34 @@ Use the `$this->model` link to refer to the payment model. When executed, the `$
 ```php
 namespace App\Payments;
 
+use App\Models\User;
 use CashierProvider\Core\Resources\Model;
 
 class BankName extends Model
 {
-    protected function paymentId(): string
+    public function getShowCaseId(): ?string
     {
-        return (string) $this->model->id;
+        return config('cashier.drivers.tinkoff_credit.show_case_id');
     }
 
-    protected function sum(): float
+    public function getPromoCode(): ?string
     {
-        return (float) $this->model->sum;
+        return config('cashier.drivers.tinkoff_credit.promocode');
     }
 
-    protected function currency(): int
+    public function getClient(): User
     {
-        return $this->model->currency;
+        return $this->model->client;
     }
 
-    protected function createdAt(): Carbon
+    public function getSum(): int
     {
-        return $this->model->created_at;
-    }
-}
-```
-
-#### Custom Authentication
-
-In some cases, the application can send requests to the bank from different terminals. For example, when one application serves payments of several companies.
-
-In order for the payment to be authorized with the required authorization data, you can override the `clientId` and `clientSecret` methods:
-
-```php
-namespace App\Payments;
-
-use App\Models\Payment;
-use CashierProvider\Core\Resources\Model;
-use Illuminate\Database\Eloquent\Builder;
-
-class BankName extends Model
-{
-    protected $bank;
-
-    protected function clientId(): string
-    {
-        return $this->bank()->client_id;
+        return (int) $this->sum();
     }
 
-    protected function clientSecret(): string
+    public function getItems(): Collection
     {
-        return $this->bank()->client_secret;
+        return $this->model->order->items;
     }
 
     protected function paymentId(): string
@@ -145,18 +124,6 @@ class BankName extends Model
     protected function createdAt(): Carbon
     {
         return $this->model->created_at;
-    }
-
-    protected function bank()
-    {
-        if (! empty($this->bank)) {
-            return $this->bank;
-        }
-
-        return $this->bank = $this->model->types()
-            ->where('type', Payment::TYPE_BANK_NAME)
-            ->firstOrFail()
-            ->bank;
     }
 }
 ```
@@ -170,7 +137,7 @@ To get a link, contact him through the cast:
 ```php
 use App\Models\Payment;
 
-public function getCredit(Payment $payment): string
+public function getCreditUrl(Payment $payment): string
 {
     return $payment->cashier->details->getUrl();
 }
