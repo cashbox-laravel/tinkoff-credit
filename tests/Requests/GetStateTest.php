@@ -26,9 +26,9 @@ class GetStateTest extends TestCase
 
         $this->assertInstanceOf(Builder::class, $request->uri());
 
-        $external_id = self::PAYMENT_EXTERNAL_ID;
+        $id = self::PAYMENT_ID;
 
-        $this->assertSame("https://forma.tinkoff.ru/api/partners/v2/orders/{$external_id}/info", $request->uri()->toUrl());
+        $this->assertSame("https://forma.tinkoff.ru/api/partners/v2/orders/{$id}/info", $request->uri()->toUrl());
     }
 
     public function testHeaders()
@@ -60,10 +60,7 @@ class GetStateTest extends TestCase
         $request = $this->request(GetState::class);
 
         $this->assertIsArray($request->body());
-
-        $this->assertSame([
-            'orderNumber' => self::PAYMENT_EXTERNAL_ID,
-        ], $request->body());
+        $this->assertEmpty($request->body());
     }
 
     public function testGetRawBody()
@@ -71,9 +68,6 @@ class GetStateTest extends TestCase
         $request = $this->request(GetState::class);
 
         $this->assertIsArray($request->getRawBody());
-
-        $this->assertSame([
-            'orderNumber' => self::PAYMENT_EXTERNAL_ID,
-        ], $request->getRawBody());
+        $this->assertEmpty($request->body());
     }
 }

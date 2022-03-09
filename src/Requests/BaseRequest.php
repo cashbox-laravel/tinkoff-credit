@@ -6,13 +6,12 @@ namespace CashierProvider\Tinkoff\Credit\Requests;
 
 use CashierProvider\Core\Facades\Config\Main;
 use CashierProvider\Core\Http\Request;
+use DragonCode\Support\Facades\Helpers\Str;
 use Lmc\HttpConstants\Header;
 
 abstract class BaseRequest extends Request
 {
     protected $production_host = 'https://forma.tinkoff.ru';
-
-    protected $dev_host = 'https://forma.tinkoff.ru';
 
     protected $headers = [
         Header::ACCEPT       => 'application/json',
@@ -21,20 +20,26 @@ abstract class BaseRequest extends Request
 
     public function getRawHeaders(): array
     {
-        return $this->hash ? array_merge($this->headers, $this->getAuthHeaders()) : $this->headers;
+        return $this->headers;
     }
 
-    protected function getAuthHeaders(): array
+    public function getHttpOptions(): array
     {
-        return [
-            Header::AUTHORIZATION => 'Basic ' . $this->model->getClientId() . ':' . $this->model->getClientSecret(),
-            //Header::AUTHORIZATION => 'Basic ' . base64_encode($this->model->getClientId() . ':' . $this->model->getClientSecret()),
-        ];
+        if ($this->hash) {
+            return ['auth' => [$this->getShowCaseId(), $this->model->getClientSecret()]];
+        }
+
+        return [];
+    }
+
+    protected function getShowCaseId(): string
+    {
+        return Main::isProduction() ? $this->model->getShowCaseId() : Str::start($this->model->getShowCaseId(), 'demo-');
     }
 
     protected function getPath(): ?string
     {
-        return str_replace('{orderNumber}', $this->model->getExternalId(), $this->getUri());
+        return str_replace('{orderNumber}', $this->model->getPaymentId(), $this->getUri());
     }
 
     protected function getUri(): string

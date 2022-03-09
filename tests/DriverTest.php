@@ -5,6 +5,7 @@ namespace Tests;
 use CashierProvider\Core\Http\Response;
 use CashierProvider\Core\Services\Jobs;
 use CashierProvider\Tinkoff\Credit\Driver as Credit;
+use CashierProvider\Tinkoff\Credit\Exceptions\Http\CancelDeniedException;
 use DragonCode\Contracts\Cashier\Driver as DriverContract;
 use DragonCode\Contracts\Cashier\Http\Response as ResponseContract;
 use DragonCode\Support\Facades\Http\Url;
@@ -27,7 +28,7 @@ class DriverTest extends TestCase
         $this->assertIsString($response->getExternalId());
         $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $response->getExternalId());
 
-        $this->assertNull($response->getStatus());
+        $this->assertSame(self::STATUS, $response->getStatus());
 
         $this->assertTrue(Url::is($response->getUrl()));
     }
@@ -44,31 +45,26 @@ class DriverTest extends TestCase
         $this->assertInstanceOf(ResponseContract::class, $response);
 
         $this->assertIsString($response->getExternalId());
-        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $response->getExternalId());
+        $this->assertMatchesRegularExpression('/^\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $response->getExternalId());
 
-        $this->assertSame('FORM_SHOWED', $response->getStatus());
+        $this->assertSame('new', $response->getStatus());
 
         $this->assertSame([
-            'status' => 'FORM_SHOWED',
+            'status' => 'new',
         ], $response->toArray());
     }
 
     public function testRefund()
     {
+        $this->expectException(CancelDeniedException::class);
+        $this->expectExceptionMessage('Запрещено отменять эту заявку');
+
         $payment = $this->payment();
 
         Jobs::make($payment)->start();
         Jobs::make($payment)->check(true);
 
-        $response = $this->driver($payment)->refund();
-
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertInstanceOf(ResponseContract::class, $response);
-
-        $this->assertIsString($response->getExternalId());
-        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $response->getExternalId());
-
-        $this->assertSame('CANCELED', $response->getStatus());
+        $this->driver($payment)->refund();
     }
 
     protected function driver(Model $payment): DriverContract

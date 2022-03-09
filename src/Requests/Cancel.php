@@ -12,8 +12,6 @@ class Cancel extends BaseRequest
 
     public function getRawBody(): array
     {
-        return [
-            'orderNumber' => $this->model->getExternalId(),
-        ];
+        return [];
     }
 }

@@ -15,6 +15,9 @@ use CashierProvider\Core\Exceptions\Http\SumException;
 use CashierProvider\Core\Exceptions\Http\TooManyRequestsException;
 use CashierProvider\Core\Exceptions\Http\TryAgainLaterClientException;
 use CashierProvider\Core\Exceptions\Manager as ExceptionManager;
+use CashierProvider\Tinkoff\Credit\Exceptions\Http\CancelDeniedException;
+use CashierProvider\Tinkoff\Credit\Exceptions\Http\NotFoundException;
+use Illuminate\Support\Arr;
 
 class Manager extends ExceptionManager
 {
@@ -26,6 +29,8 @@ class Manager extends ExceptionManager
         102  => PaymentDeclinedException::class,
         103  => TryAgainLaterClientException::class,
         119  => TooManyRequestsException::class,
+        403  => CancelDeniedException::class,
+        404  => NotFoundException::class,
         604  => PaymentDeclinedException::class,
         620  => SumException::class,
         623  => PaymentCompletedException::class,
@@ -67,7 +72,8 @@ class Manager extends ExceptionManager
         9999 => BankInternalErrorException::class,
     ];
 
-    protected $code_keys = ['ErrorCode'];
-
-    protected $reason_keys = ['Details', 'Message'];
+    protected function getReason(array $response): ?string
+    {
+        return Arr::first($response);
+    }
 }
