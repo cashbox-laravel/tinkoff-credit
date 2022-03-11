@@ -28,7 +28,13 @@ class Model extends BaseModel
 
     public function getItems(): Collection
     {
-        return collect([new OrderItem()]);
+        return collect([new OrderItem()])->map(function ($item) {
+            return [
+                'name'     => $item->name,
+                'quantity' => $item->quantity,
+                'price'    => (int) $item->price,
+            ];
+        });
     }
 
     public function getSum(): int
