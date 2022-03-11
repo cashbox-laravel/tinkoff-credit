@@ -8,7 +8,7 @@ Authorization: Basic {{showCaseId}} {{password}}
     "showcaseId": "{{showCaseId}}",
     "promoCode": "{{promoCode}}",
     "sum": 6000,
-    "orderNumber": "{{orderNumber}}",
+    "orderNumber": "{{$uuid}}",
     "values": {
         "contact": {
             "fio": {
