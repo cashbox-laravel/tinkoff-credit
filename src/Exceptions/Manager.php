@@ -72,7 +72,7 @@ class Manager extends ExceptionManager
         9999 => BankInternalErrorException::class,
     ];
 
-    protected $reason_keys = ['errors'];
+    protected $reason_keys = ['Message', 'Data', 'errors'];
 
     protected function getReason(array $response): ?string
     {
@@ -88,6 +88,6 @@ class Manager extends ExceptionManager
             }
         }
 
-        return null;
+        return ! empty($response) ? Arr::first($response) : null;
     }
 }

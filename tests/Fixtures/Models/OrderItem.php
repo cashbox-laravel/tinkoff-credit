@@ -19,7 +19,7 @@ class OrderItem extends Model
         parent::__construct([
             'name'     => TestCase::ORDER_ITEM_TITLE,
             'quantity' => 1,
-            'price'    => (int) TestCase::PAYMENT_SUM,
+            'price'    => TestCase::PAYMENT_SUM,
         ]);
     }
 }

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace CashierProvider\Tinkoff\Credit\Requests;
 
-use Illuminate\Support\Arr;
-
 class Init extends BaseRequest
 {
     protected $path = '/api/partners/v2/orders/create';
@@ -38,19 +36,8 @@ class Init extends BaseRequest
                 ],
             ],
 
-            'items' => $this->getItems(),
+            'items' => $this->model->getItems()->toArray(),
         ];
-    }
-
-    protected function getItems(): array
-    {
-        return array_map(static function ($item) {
-            $price = Arr::get($item, 'price', 0);
-
-            Arr::set($item, 'price', (int) $price);
-
-            return $item;
-        }, $this->model->getItems()->each->only(['name', 'quantity', 'price'])->toArray());
     }
 
     protected function getPath(): ?string
