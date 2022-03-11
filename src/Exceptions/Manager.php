@@ -72,8 +72,22 @@ class Manager extends ExceptionManager
         9999 => BankInternalErrorException::class,
     ];
 
+    protected $reason_keys = ['errors'];
+
     protected function getReason(array $response): ?string
     {
-        return Arr::first($response);
+        foreach ($this->reason_keys as $key) {
+            if ($value = Arr::get($response, $key)) {
+                if (is_string($value)) {
+                    return $value;
+                }
+
+                if (is_array($value)) {
+                    return Arr::first($value);
+                }
+            }
+        }
+
+        return null;
     }
 }
