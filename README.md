@@ -1,6 +1,6 @@
 # Tinkoff Credit
 
-![cashier provider driver template](https://preview.dragon-code.pro/cashier-provider/tinkoff-credit.svg?brand=laravel)
+![cashier provider driver template](https://preview.dragon-code.pro/cashier-provider/tinkoff-credit.svg?brand=laravel&mode=dark)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
