@@ -1,171 +1,50 @@
-# Tinkoff Credit
+# Tinkoff Credit Driver
 
-![cashier provider driver template](https://preview.dragon-code.pro/cashier-provider/tinkoff-credit.svg?brand=laravel&mode=dark)
+![cashier-provider](https://preview.dragon-code.pro/cashier-provider/tinkoff-credit.svg?brand=laravel)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
 [![Total Downloads][badge_downloads]][link_packagist]
 [![License][badge_license]][link_license]
 
-
-## Installation
-
-To get the latest version of `Tinkoff Credit`, simply require the project using [Composer](https://getcomposer.org):
-
-```bash
-$ composer require cashier-provider/tinkoff-credit
-```
-
-Or manually update `require` block of `composer.json` and run `composer update`.
-
-```json
-{
-    "require": {
-        "cashier-provider/tinkoff-credit": "^1.0"
-    }
-}
-```
-
-## Using
-
-> **Note**:
+> Attention
 >
-> This project is the driver for [`Cashier Provider`](https://github.com/cashier-provider/core).
->
-> Shop ID and Show Case ID must be provided by the bank manager in response to the agreement concluded with the bank.
+> The project is in a state of global upgrade and some links may not be correct.
 
+## About Cashier Provider
 
-### Configuration
+`Cashier` provides an expressive and user-friendly interface for managing billing and payment verification services.
+We believe that development should be an enjoyable, creative experience to be truly rewarding.
+`Cashier Provider` tries to ease development by simplifying the tasks of adding payment systems to a web application.
 
-Add your driver information to the `config/cashier.php` file:
+The project contains some ready-made solutions of payment systems, but you can offer your own.
 
-```php
-use App\Models\Payment;
-use App\Payments\Tinkoff as TinkoffDetails;
-use CashierProvider\Core\Constants\Driver;
-use CashierProvider\Tinkoff\Credit\Driver as TinkoffCreditDriver;
+## About Driver
 
-return [
-    'payment' => [
-        'map' => [
-            Payment::TYPE_TINKOFF_CREDIT => 'tinkoff_credit'
-        ]
-    ],
+The driver allows you to use the credit payment system from [Tinkoff](https://www.tinkoff.ru) in the web application.
 
-    'drivers' => [
-        'tinkoff_credit' => [
-            Driver::DRIVER  => TinkoffCreditDriver::class,
-            Driver::DETAILS => TinkoffDetails::class,
+## Documentation
 
-            DriverConstant::CLIENT_ID     => env('CASHIER_TINKOFF_CREDIT_CLIENT_ID'),
-            DriverConstant::CLIENT_SECRET => env('CASHIER_TINKOFF_CREDIT_PASSWORD'),
+You will find full documentation on the dedicated [documentation](https://github.com/cashier-provider/docs) site.
 
-            'show_case_id' => env('CASHIER_TINKOFF_CREDIT_SHOW_CASE_ID'),
-            'promocode'    => env('CASHIER_TINKOFF_CREDIT_PROMOCODE', 'default'),
-        ]
-    ]
-];
-```
+## Contributing
 
-### Resource
+Thank you for considering contributing to the `Cashier Provider`!
+The contribution guide can be found in the [Cashier Provider documentation](https://github.com/cashier-provider/docs).
 
-Create a model resource class inheriting from `CashierProvider\Core\Resources\Model` in your application.
+## Code of Conduct
 
-Use the `$this->model` link to refer to the payment model. When executed, the `$model` parameter will contain the payment instance.
+In order to ensure that the `Cashier Provider` community is welcoming to all, please review and abide by
+the [Code of Conduct](https://github.com/cashier-provider/docs).
 
-```php
-namespace App\Payments;
+## Security Vulnerabilities
 
-use App\Models\User;
-use CashierProvider\Core\Resources\Model;
+Please review [our security policy](https://github.com/cashier-provider/docs) on how to report security vulnerabilities.
 
-class BankName extends Model
-{
-    public function getShowCaseId(): ?string
-    {
-        return config('cashier.drivers.tinkoff_credit.show_case_id');
-    }
+## License
 
-    public function getPromoCode(): ?string
-    {
-        return config('cashier.drivers.tinkoff_credit.promocode');
-    }
-
-    public function getClient(): User
-    {
-        return $this->model->client;
-    }
-
-    public function getSum(): int
-    {
-        return (int) $this->sum();
-    }
-
-    public function getItems(): Collection
-    {
-        return $this->model->order->items;
-    }
-
-    protected function paymentId(): string
-    {
-        return (string) $this->model->id;
-    }
-
-    protected function sum(): float
-    {
-        return (float) $this->model->sum;
-    }
-
-    protected function currency(): int
-    {
-        return $this->model->currency;
-    }
-
-    protected function createdAt(): Carbon
-    {
-        return $this->model->created_at;
-    }
-}
-```
-
-### Response
-
-All requests to the bank and processing of responses are carried out by the [`Cashier Provider`](https://github.com/cashier-provider/core) project.
-
-To get a link, contact him through the cast:
-
-```php
-use App\Models\Payment;
-
-public function getCreditUrl(Payment $payment): string
-{
-    return $payment->cashier->details->getUrl();
-}
-```
-
-### Available Methods And Details Data
-
-```php
-$payment->cashier->external_id
-// Returns the bank's transaction ID for this operation
-
-$payment->cashier->details->getStatus(): ?string
-// Returns the text status from the bank
-// For example, `NEW`.
-
-$payment->cashier->details->getUrl(): ?string
-// If the request to get the link was successful, it will return the URL
-// For example, `https://dev.bank-uri.com/<hash>?<params>`
-
-$payment->cashier->details->toArray(): array
-// Returns an array of status and URL.
-// For example,
-//
-// [
-//     'url' => 'https://dev.bank-uri.com/<hash>?<params>',
-//     'status' => 'NEW'
-// ]
-```
+The Cashier Provider is open-source software that works in conjunction with
+the [Laravel framework](https://laravel.com/), distributed under the MIT license.
 
 [badge_downloads]:      https://img.shields.io/packagist/dt/cashier-provider/tinkoff-credit.svg?style=flat-square
 
