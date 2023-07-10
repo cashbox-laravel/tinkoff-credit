@@ -70,7 +70,7 @@ class InitTest extends TestCase
 
             'values' => [
                 'contact' => [
-                    'fio'         => [
+                    'fio' => [
                         'lastName'   => self::USER_LAST_NAME,
                         'firstName'  => self::USER_FIRST_NAME,
                         'middleName' => self::USER_MIDDLE_NAME,
@@ -107,7 +107,7 @@ class InitTest extends TestCase
 
             'values' => [
                 'contact' => [
-                    'fio'         => [
+                    'fio' => [
                         'lastName'   => self::USER_LAST_NAME,
                         'firstName'  => self::USER_FIRST_NAME,
                         'middleName' => self::USER_MIDDLE_NAME,

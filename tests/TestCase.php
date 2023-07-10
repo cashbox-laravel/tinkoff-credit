@@ -21,41 +21,24 @@ abstract class TestCase extends BaseTestCase
 {
     use Database;
 
-    public const PAYMENT_EXTERNAL_ID = '456789';
-
-    public const PAYMENT_ID = '1234567890';
-
-    public const PAYMENT_SUM = 6000.34;
-
-    public const PAYMENT_SUM_FORMATTED = 600034;
-
-    public const CURRENCY = 643;
-
-    public const CURRENCY_FORMATTED = '643';
-
-    public const PAYMENT_DATE = '2021-07-23 17:33:27';
-
+    public const PAYMENT_EXTERNAL_ID    = '456789';
+    public const PAYMENT_ID             = '1234567890';
+    public const PAYMENT_SUM            = 6000.34;
+    public const PAYMENT_SUM_FORMATTED  = 600034;
+    public const CURRENCY               = 643;
+    public const CURRENCY_FORMATTED     = '643';
+    public const PAYMENT_DATE           = '2021-07-23 17:33:27';
     public const PAYMENT_DATE_FORMATTED = '2021-07-23T17:33:27Z';
-
-    public const STATUS = 'NEW';
-
-    public const URL = 'https://example.com';
-
-    public const MODEL_TYPE_ID = 123;
-
-    public const MODEL_STATUS_ID = 0;
-
-    public const USER_FIRST_NAME = 'John';
-
-    public const USER_MIDDLE_NAME = 'Michael';
-
-    public const USER_LAST_NAME = 'Doe';
-
-    public const USER_PHONE = '+79123456789';
-
-    public const USER_EMAIL = 'john@example.com';
-
-    public const ORDER_ITEM_TITLE = 'Item Name';
+    public const STATUS                 = 'NEW';
+    public const URL                    = 'https://example.com';
+    public const MODEL_TYPE_ID          = 123;
+    public const MODEL_STATUS_ID        = 0;
+    public const USER_FIRST_NAME        = 'John';
+    public const USER_MIDDLE_NAME       = 'Michael';
+    public const USER_LAST_NAME         = 'Doe';
+    public const USER_PHONE             = '+79123456789';
+    public const USER_EMAIL             = 'john@example.com';
+    public const ORDER_ITEM_TITLE       = 'Item Name';
 
     protected function getPackageProviders($app): array
     {
@@ -115,9 +98,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * @param \CashierProvider\Tinkoff\Credit\Requests\BaseRequest|string $request
-     *
-     * @return \DragonCode\Contracts\Cashier\Http\Request
+     * @param  \CashierProvider\Tinkoff\Credit\Requests\BaseRequest|string  $request
      */
     protected function request(string $request): Request
     {
