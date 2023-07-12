@@ -15,7 +15,7 @@
 
 namespace Tests;
 
-use CashierProvider\Core\Http\Response;
+use CashierProvider\Core\Http\ResponseInfo;
 use CashierProvider\Core\Services\Jobs;
 use CashierProvider\Tinkoff\Credit\Driver as Credit;
 use CashierProvider\Tinkoff\Credit\Exceptions\Http\CancelDeniedException;
@@ -35,7 +35,7 @@ class DriverTest extends TestCase
 
         $response = $this->driver($payment)->start();
 
-        $this->assertInstanceOf(Response::class, $response);
+        $this->assertInstanceOf(ResponseInfo::class, $response);
         $this->assertInstanceOf(ResponseContract::class, $response);
 
         $this->assertIsString($response->getExternalId());
@@ -54,7 +54,7 @@ class DriverTest extends TestCase
 
         $response = $this->driver($payment)->check();
 
-        $this->assertInstanceOf(Response::class, $response);
+        $this->assertInstanceOf(ResponseInfo::class, $response);
         $this->assertInstanceOf(ResponseContract::class, $response);
 
         $this->assertIsString($response->getExternalId());
