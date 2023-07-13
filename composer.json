@@ -1,6 +1,6 @@
 {
     "name": "cashbox/tinkoff-credit",
-    "description": "Driver for payment with Credit via Tinkoff Bank (see cashbox/core)",
+    "description": "The Tinkoff Credit driver implements payments in the Tinkoff billing system.",
     "license": "MIT",
     "type": "library",
     "keywords": [
@@ -65,6 +65,7 @@
         "branch-alias": {
             "dev-main": "4.x-dev"
         },
+        "title": "Tinkoff Credit Driver",
         "thanks": [
             {
                 "name": "dragon-code/laravel-support",
