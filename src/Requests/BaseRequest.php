@@ -15,10 +15,10 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\Credit\Requests;
+namespace Cashbox\Tinkoff\Credit\Requests;
 
-use CashierProvider\Core\Facades\Config\Main;
-use CashierProvider\Core\Http\Request;
+use Cashbox\Core\Facades\Config\Main;
+use Cashbox\Core\Http\Request;
 use DragonCode\Support\Facades\Helpers\Str;
 use Lmc\HttpConstants\Header;
 

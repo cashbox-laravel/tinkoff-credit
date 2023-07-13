@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\Credit\Requests;
+namespace Cashbox\Tinkoff\Credit\Requests;
 
 use Fig\Http\Message\RequestMethodInterface;
 

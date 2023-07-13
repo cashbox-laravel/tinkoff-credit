@@ -15,10 +15,10 @@
 
 namespace Tests;
 
-use CashierProvider\Core\Http\ResponseInfo;
-use CashierProvider\Core\Services\Jobs;
-use CashierProvider\Tinkoff\Credit\Driver as Credit;
-use CashierProvider\Tinkoff\Credit\Exceptions\Http\CancelDeniedException;
+use Cashbox\Core\Http\ResponseInfo;
+use Cashbox\Core\Services\Jobs;
+use Cashbox\Tinkoff\Credit\Driver as Credit;
+use Cashbox\Tinkoff\Credit\Exceptions\Http\CancelDeniedException;
 use DragonCode\Contracts\Cashier\Driver as DriverContract;
 use DragonCode\Contracts\Cashier\Http\Response as ResponseContract;
 use DragonCode\Support\Facades\Http\Url;

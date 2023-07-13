@@ -48,7 +48,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "CashierProvider\\Tinkoff\\Credit\\": "src/"
+            "Cashbox\\Tinkoff\\Credit\\": "src/"
         }
     },
     "config": {

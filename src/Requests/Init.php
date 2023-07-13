@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\Credit\Requests;
+namespace Cashbox\Tinkoff\Credit\Requests;
 
 class Init extends BaseRequest
 {

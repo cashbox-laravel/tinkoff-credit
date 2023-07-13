@@ -15,8 +15,8 @@
 
 namespace Tests\Requests;
 
-use CashierProvider\Core\Http\Request;
-use CashierProvider\Tinkoff\Credit\Requests\Init;
+use Cashbox\Core\Http\Request;
+use Cashbox\Tinkoff\Credit\Requests\Init;
 use DragonCode\Contracts\Cashier\Http\Request as RequestContract;
 use DragonCode\Contracts\Http\Builder;
 use Lmc\HttpConstants\Header;

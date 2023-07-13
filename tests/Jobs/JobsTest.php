@@ -15,10 +15,10 @@
 
 namespace Tests\Jobs;
 
-use CashierProvider\Core\Constants\Status;
-use CashierProvider\Core\Facades\Config\Payment as PaymentConfig;
-use CashierProvider\Core\Services\Jobs;
-use CashierProvider\Tinkoff\Credit\Exceptions\Http\CancelDeniedException;
+use Cashbox\Core\Constants\Status;
+use Cashbox\Core\Facades\Config\Payment as PaymentConfig;
+use Cashbox\Core\Services\Jobs;
+use Cashbox\Tinkoff\Credit\Exceptions\Http\CancelDeniedException;
 use DragonCode\Support\Facades\Http\Url;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;

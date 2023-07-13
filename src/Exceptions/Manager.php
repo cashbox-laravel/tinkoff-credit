@@ -13,23 +13,23 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace CashierProvider\Tinkoff\Credit\Exceptions;
+namespace Cashbox\Tinkoff\Credit\Exceptions;
 
-use CashierProvider\Core\Exceptions\Http\BankInternalErrorException;
-use CashierProvider\Core\Exceptions\Http\BuyerNotFoundClientException;
-use CashierProvider\Core\Exceptions\Http\CardHasStolenException;
-use CashierProvider\Core\Exceptions\Http\ContactTheSellerClientException;
-use CashierProvider\Core\Exceptions\Http\InsufficientFundsCardException;
-use CashierProvider\Core\Exceptions\Http\InvalidCardException;
-use CashierProvider\Core\Exceptions\Http\PaymentCompletedException;
-use CashierProvider\Core\Exceptions\Http\PaymentDeclinedException;
-use CashierProvider\Core\Exceptions\Http\PaymentTypeNotAvailableException;
-use CashierProvider\Core\Exceptions\Http\SumException;
-use CashierProvider\Core\Exceptions\Http\TooManyRequestsException;
-use CashierProvider\Core\Exceptions\Http\TryAgainLaterClientException;
-use CashierProvider\Core\Exceptions\Manager as ExceptionManager;
-use CashierProvider\Tinkoff\Credit\Exceptions\Http\CancelDeniedException;
-use CashierProvider\Tinkoff\Credit\Exceptions\Http\NotFoundException;
+use Cashbox\Core\Exceptions\Http\BankInternalErrorException;
+use Cashbox\Core\Exceptions\Http\BuyerNotFoundClientException;
+use Cashbox\Core\Exceptions\Http\CardHasStolenException;
+use Cashbox\Core\Exceptions\Http\ContactTheSellerClientException;
+use Cashbox\Core\Exceptions\Http\InsufficientFundsCardException;
+use Cashbox\Core\Exceptions\Http\InvalidCardException;
+use Cashbox\Core\Exceptions\Http\PaymentCompletedException;
+use Cashbox\Core\Exceptions\Http\PaymentDeclinedException;
+use Cashbox\Core\Exceptions\Http\PaymentTypeNotAvailableException;
+use Cashbox\Core\Exceptions\Http\SumException;
+use Cashbox\Core\Exceptions\Http\TooManyRequestsException;
+use Cashbox\Core\Exceptions\Http\TryAgainLaterClientException;
+use Cashbox\Core\Exceptions\Manager as ExceptionManager;
+use Cashbox\Tinkoff\Credit\Exceptions\Http\CancelDeniedException;
+use Cashbox\Tinkoff\Credit\Exceptions\Http\NotFoundException;
 use Illuminate\Support\Arr;
 
 class Manager extends ExceptionManager

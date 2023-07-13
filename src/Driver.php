@@ -13,18 +13,18 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace CashierProvider\Tinkoff\Credit;
+namespace Cashbox\Tinkoff\Credit;
 
-use CashierProvider\Core\Services\Driver as BaseDriver;
-use CashierProvider\Tinkoff\Credit\Exceptions\Manager;
-use CashierProvider\Tinkoff\Credit\Helpers\Statuses;
-use CashierProvider\Tinkoff\Credit\Requests\Cancel;
-use CashierProvider\Tinkoff\Credit\Requests\GetState;
-use CashierProvider\Tinkoff\Credit\Requests\Init;
-use CashierProvider\Tinkoff\Credit\Resources\Details;
-use CashierProvider\Tinkoff\Credit\Responses\Created;
-use CashierProvider\Tinkoff\Credit\Responses\Refund;
-use CashierProvider\Tinkoff\Credit\Responses\State;
+use Cashbox\Core\Services\Driver as BaseDriver;
+use Cashbox\Tinkoff\Credit\Exceptions\Manager;
+use Cashbox\Tinkoff\Credit\Helpers\Statuses;
+use Cashbox\Tinkoff\Credit\Requests\Cancel;
+use Cashbox\Tinkoff\Credit\Requests\GetState;
+use Cashbox\Tinkoff\Credit\Requests\Init;
+use Cashbox\Tinkoff\Credit\Resources\Details;
+use Cashbox\Tinkoff\Credit\Responses\Created;
+use Cashbox\Tinkoff\Credit\Responses\Refund;
+use Cashbox\Tinkoff\Credit\Responses\State;
 use DragonCode\Contracts\Cashier\Http\Response;
 
 class Driver extends BaseDriver

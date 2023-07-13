@@ -13,9 +13,9 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace CashierProvider\Tinkoff\Credit\Exceptions\Http;
+namespace Cashbox\Tinkoff\Credit\Exceptions\Http;
 
-use CashierProvider\Core\Exceptions\Http\BaseException;
+use Cashbox\Core\Exceptions\Http\BaseException;
 
 class CancelDeniedException extends BaseException
 {

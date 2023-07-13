@@ -15,7 +15,7 @@
 
 namespace Tests\Fixtures\Resources;
 
-use CashierProvider\Core\Resources\Model as BaseModel;
+use Cashbox\Core\Resources\Model as BaseModel;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Tests\Fixtures\Models\OrderItem;
