@@ -50,12 +50,12 @@ class ObserverTest extends TestCase
         $this->assertSame(1, DB::table('payments')->count());
         $this->assertSame(1, DB::table('cashier_details')->count());
 
-        $this->assertIsString($payment->cashier->external_id);
-        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $payment->cashier->external_id);
+        $this->assertIsString($payment->cashbox->external_id);
+        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $payment->cashbox->external_id);
 
-        $this->assertTrue(Url::is($payment->cashier->details->getUrl()));
+        $this->assertTrue(Url::is($payment->cashbox->details->getUrl()));
 
-        $this->assertSame('NEW', $payment->cashier->details->getStatus());
+        $this->assertSame('NEW', $payment->cashbox->details->getStatus());
 
         $this->assertSame(
             PaymentConfig::getStatuses()->getStatus(Status::NEW),
@@ -78,12 +78,12 @@ class ObserverTest extends TestCase
         $this->assertSame(1, DB::table('payments')->count());
         $this->assertSame(1, DB::table('cashier_details')->count());
 
-        $this->assertIsString($payment->cashier->external_id);
-        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $payment->cashier->external_id);
+        $this->assertIsString($payment->cashbox->external_id);
+        $this->assertMatchesRegularExpression('/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/', $payment->cashbox->external_id);
 
-        $this->assertTrue(Url::is($payment->cashier->details->getUrl()));
+        $this->assertTrue(Url::is($payment->cashbox->details->getUrl()));
 
-        $this->assertSame('NEW', $payment->cashier->details->getStatus());
+        $this->assertSame('NEW', $payment->cashbox->details->getStatus());
 
         $this->assertSame(
             PaymentConfig::getStatuses()->getStatus(Status::NEW),
