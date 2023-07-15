@@ -17,9 +17,9 @@ declare(strict_types=1);
 
 namespace Cashbox\Tinkoff\Credit\Responses;
 
-use Cashbox\Core\Http\ResponseInfo;
+use Cashbox\Core\Http\Response;
 
-class Created extends ResponseInfo
+class Created extends Response
 {
     public const KEY_URL = 'url';
 
