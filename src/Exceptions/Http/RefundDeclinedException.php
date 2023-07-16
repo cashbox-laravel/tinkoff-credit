@@ -15,11 +15,11 @@
 
 namespace Cashbox\Tinkoff\Credit\Exceptions\Http;
 
-use Cashbox\Core\Exceptions\Http\BaseException;
+use Cashbox\Core\Exceptions\BaseException;
 
-class NotFoundException extends BaseException
+class RefundDeclinedException extends BaseException
 {
-    protected $status_code = 404;
+    protected int $statusCode = 403;
 
-    protected $reason = 'Payment not found';
+    protected string $reason = 'Refund declined';
 }

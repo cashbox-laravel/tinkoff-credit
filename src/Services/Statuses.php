@@ -13,23 +13,15 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace Cashbox\Tinkoff\Credit\Helpers;
+namespace Cashbox\Tinkoff\Credit\Services;
 
 use Cashbox\Core\Services\Statuses as BaseStatus;
 
 class Statuses extends BaseStatus
 {
-    public const NEW = [
-        'NEW',
-    ];
+    public const FAILED    = ['REJECTED'];
+    public const NEW       = ['NEW'];
+    public const REFUNDED  = ['CANCELED'];
     public const REFUNDING = [];
-    public const REFUNDED  = [
-        'CANCELED',
-    ];
-    public const FAILED = [
-        'REJECTED',
-    ];
-    public const SUCCESS = [
-        'APPROVED',
-    ];
+    public const SUCCESS   = ['APPROVED'];
 }

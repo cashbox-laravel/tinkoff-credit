@@ -15,44 +15,32 @@
 
 namespace Cashbox\Tinkoff\Credit;
 
+use Cashbox\Core\Http\Response as BaseInfoData;
 use Cashbox\Core\Services\Driver as BaseDriver;
-use Cashbox\Tinkoff\Credit\Exceptions\Manager;
-use Cashbox\Tinkoff\Credit\Helpers\Statuses;
-use Cashbox\Tinkoff\Credit\Requests\Cancel;
-use Cashbox\Tinkoff\Credit\Requests\GetState;
-use Cashbox\Tinkoff\Credit\Requests\Init;
-use Cashbox\Tinkoff\Credit\Resources\Details;
-use Cashbox\Tinkoff\Credit\Responses\Created;
-use Cashbox\Tinkoff\Credit\Responses\Refund;
-use Cashbox\Tinkoff\Credit\Responses\State;
-use DragonCode\Contracts\Cashier\Http\Response;
+use Cashbox\Tinkoff\Credit\Exceptions\Exception;
+use Cashbox\Tinkoff\Credit\Http\Resources\Response;
+use Cashbox\Tinkoff\Credit\Services\Statuses;
 
 class Driver extends BaseDriver
 {
-    protected $exception = Manager::class;
+    protected string $statuses = Statuses::class;
 
-    protected $statuses = Statuses::class;
+    protected string $exception = Exception::class;
 
-    protected $details = Details::class;
+    protected string $response = Response::class;
 
-    public function start(): Response
+    public function start(): BaseInfoData
     {
-        $request = Init::make($this->model);
-
-        return $this->request($request, Created::class);
+        return $this->request(CreateRequest::class);
     }
 
-    public function check(): Response
+    public function refund(): BaseInfoData
     {
-        $request = GetState::make($this->model);
-
-        return $this->request($request, State::class);
+        return $this->request(RefundRequest::class);
     }
 
-    public function refund(): Response
+    public function verify(): BaseInfoData
     {
-        $request = Cancel::make($this->model);
-
-        return $this->request($request, Refund::class);
+        return $this->request(VerifyRequest::class);
     }
 }
