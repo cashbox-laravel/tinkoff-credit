@@ -17,10 +17,10 @@ namespace Cashbox\Tinkoff\Credit;
 
 use Cashbox\Core\Http\Response as BaseInfoData;
 use Cashbox\Core\Services\Driver as BaseDriver;
+use Cashbox\Tinkoff\Credit\Http\Requests\CancelRequest;
 use Cashbox\Tinkoff\Credit\Http\Requests\CreateRequest;
 use Cashbox\Tinkoff\Credit\Http\Requests\GetStateRequest;
-use Cashbox\Tinkoff\Credit\Http\Requests\CancelRequest;
-use Cashbox\Tinkoff\Credit\Http\Resources\Response;
+use Cashbox\Tinkoff\Credit\Http\Responses\Response;
 use Cashbox\Tinkoff\Credit\Services\Exception;
 use Cashbox\Tinkoff\Credit\Services\Statuses;
 

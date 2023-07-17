@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Tinkoff\Credit\Http\Resources;
+namespace Cashbox\Tinkoff\Credit\Http\Responses;
 
 use Cashbox\Core\Data\Models\InfoData;
 use Cashbox\Core\Http\Response as BaseData;
