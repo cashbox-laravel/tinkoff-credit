@@ -13,7 +13,7 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace Cashbox\Tinkoff\Credit\Exceptions;
+namespace Cashbox\Tinkoff\Credit\Services;
 
 use Cashbox\Core\Exceptions\External\BankInternalErrorException;
 use Cashbox\Core\Exceptions\External\BuyerNotFoundClientException;
@@ -24,11 +24,11 @@ use Cashbox\Core\Exceptions\External\InsufficientFundsCardException;
 use Cashbox\Core\Exceptions\External\InvalidCardException;
 use Cashbox\Core\Exceptions\External\PaymentCompletedException;
 use Cashbox\Core\Exceptions\External\PaymentTypeNotAvailableException;
+use Cashbox\Core\Exceptions\External\RefundDeclinedException;
 use Cashbox\Core\Exceptions\External\TooManyRequestsException;
+use Cashbox\Core\Exceptions\External\TransactionNotFoundException;
 use Cashbox\Core\Exceptions\External\TryAgainLaterClientException;
 use Cashbox\Core\Services\Exception as BaseException;
-use Cashbox\Tinkoff\Credit\Exceptions\Http\PaymentNotFoundException;
-use Cashbox\Tinkoff\Credit\Exceptions\Http\RefundDeclinedException;
 
 class Exception extends BaseException
 {
@@ -41,7 +41,7 @@ class Exception extends BaseException
         103  => TryAgainLaterClientException::class,
         119  => TooManyRequestsException::class,
         403  => RefundDeclinedException::class,
-        404  => PaymentNotFoundException::class,
+        404  => TransactionNotFoundException::class,
         604  => RefundDeclinedException::class,
         620  => IncorrectSumException::class,
         623  => PaymentCompletedException::class,

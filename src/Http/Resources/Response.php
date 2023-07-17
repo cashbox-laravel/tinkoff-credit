@@ -6,11 +6,13 @@ namespace Cashbox\Tinkoff\Credit\Http\Resources;
 
 use Cashbox\Core\Data\Models\InfoData;
 use Cashbox\Core\Http\Response as BaseData;
+use Spatie\LaravelData\Attributes\MapInputName;
 
 class Response extends BaseData
 {
     public ?string $status;
 
+    #[MapInputName('link')]
     public ?string $url;
 
     public function getOperationId(): ?string
@@ -31,7 +33,8 @@ class Response extends BaseData
     protected function getExtra(): ?array
     {
         return [
-            'url' => $this->url,
+            'status' => $this->status,
+            'url'    => $this->url,
         ];
     }
 

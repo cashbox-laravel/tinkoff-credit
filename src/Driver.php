@@ -17,8 +17,11 @@ namespace Cashbox\Tinkoff\Credit;
 
 use Cashbox\Core\Http\Response as BaseInfoData;
 use Cashbox\Core\Services\Driver as BaseDriver;
-use Cashbox\Tinkoff\Credit\Exceptions\Exception;
+use Cashbox\Tinkoff\Credit\Http\Requests\CreateRequest;
+use Cashbox\Tinkoff\Credit\Http\Requests\GetStateRequest;
+use Cashbox\Tinkoff\Credit\Http\Requests\CancelRequest;
 use Cashbox\Tinkoff\Credit\Http\Resources\Response;
+use Cashbox\Tinkoff\Credit\Services\Exception;
 use Cashbox\Tinkoff\Credit\Services\Statuses;
 
 class Driver extends BaseDriver
@@ -36,11 +39,11 @@ class Driver extends BaseDriver
 
     public function refund(): BaseInfoData
     {
-        return $this->request(RefundRequest::class);
+        return $this->request(CancelRequest::class);
     }
 
     public function verify(): BaseInfoData
     {
-        return $this->request(VerifyRequest::class);
+        return $this->request(GetStateRequest::class);
     }
 }
