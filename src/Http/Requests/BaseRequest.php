@@ -38,14 +38,14 @@ abstract class BaseRequest extends Request
     protected function clientId(): string
     {
         if (static::isProduction()) {
-            return $this->resource->clientId();
+            return $this->resource->config->credentials->clientId;
         }
 
-        return Str::start($this->resource->clientId(), 'demo-');
+        return Str::start($this->resource->config->credentials->clientId, 'demo-');
     }
 
     protected function clientSecret(): string
     {
-        return $this->resource->clientSecret();
+        return $this->resource->config->credentials->clientSecret;
     }
 }

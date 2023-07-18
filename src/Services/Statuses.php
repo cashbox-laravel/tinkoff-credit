@@ -20,8 +20,8 @@ use Cashbox\Core\Services\Statuses as BaseStatus;
 class Statuses extends BaseStatus
 {
     public const FAILED    = ['REJECTED', 'REJECT', 'CANCEL', 'CANCELED'];
-    public const NEW       = ['NEW'];
+    public const NEW       = ['NEW', 'APPROVED'];
     public const REFUNDED  = ['CANCELED'];
     public const REFUNDING = [];
-    public const SUCCESS   = ['APPROVED', 'SUCCESS'];
+    public const SUCCESS   = ['SUCCESS', 'SIGNED'];
 }

@@ -10,25 +10,25 @@ use Cashbox\Tinkoff\Credit\Data\ProductData;
 
 abstract class TinkoffCreditResource extends Resource
 {
+    abstract public function contact(): ?ContactData;
+
     /**
      * @return array<ProductData>
      */
-    abstract public function products(): array;
+    abstract public function productItems(): array;
 
-    abstract public function shopId(): string;
+    public function shopId(): string
+    {
+        return $this->config->credentials->clientId;
+    }
 
     public function showCaseId(): ?string
     {
-        return null;
+        return $this->config->credentials->extra['showcase_id'] ?? null;
     }
 
-    public function promoCode(): ?string
+    public function promoCode(): string
     {
-        return null;
-    }
-
-    public function contact(): ?ContactData
-    {
-        return null;
+        return $this->config->credentials->extra['promo_code'] ?? 'default';
     }
 }

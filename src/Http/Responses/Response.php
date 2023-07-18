@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Cashbox\Tinkoff\Credit\Http\Responses;
 
 use Cashbox\Core\Data\Models\InfoData;
-use Cashbox\Core\Http\Response as BaseData;
+use Cashbox\Core\Http\Response as BaseResponse;
 use Spatie\LaravelData\Attributes\MapInputName;
 
-class Response extends BaseData
+class Response extends BaseResponse
 {
     public ?string $status;
 

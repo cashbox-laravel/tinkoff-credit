@@ -15,14 +15,17 @@
 
 namespace Cashbox\Tinkoff\Credit;
 
-use Cashbox\Core\Http\Response as BaseInfoData;
+use Cashbox\Core\Http\Response as BaseResponse;
 use Cashbox\Core\Services\Driver as BaseDriver;
 use Cashbox\Tinkoff\Credit\Http\Requests\CancelRequest;
+use Cashbox\Tinkoff\Credit\Http\Requests\CommitRequest;
 use Cashbox\Tinkoff\Credit\Http\Requests\CreateRequest;
 use Cashbox\Tinkoff\Credit\Http\Requests\GetStateRequest;
+use Cashbox\Tinkoff\Credit\Http\Responses\CreatedResponse;
 use Cashbox\Tinkoff\Credit\Http\Responses\Response;
 use Cashbox\Tinkoff\Credit\Services\Exception;
 use Cashbox\Tinkoff\Credit\Services\Statuses;
+use Illuminate\Support\Str;
 
 class Driver extends BaseDriver
 {
@@ -32,18 +35,29 @@ class Driver extends BaseDriver
 
     protected string $response = Response::class;
 
-    public function start(): BaseInfoData
+    public function start(): BaseResponse
     {
-        return $this->request(CreateRequest::class);
+        return $this->request(CreateRequest::class, CreatedResponse::class);
     }
 
-    public function refund(): BaseInfoData
+    public function refund(): BaseResponse
     {
         return $this->request(CancelRequest::class);
     }
 
-    public function verify(): BaseInfoData
+    public function verify(): BaseResponse
     {
-        return $this->request(GetStateRequest::class);
+        $response = $this->request(GetStateRequest::class);
+
+        if ($this->isApproved($response)) {
+            return $this->request(CommitRequest::class);
+        }
+
+        return $response;
+    }
+
+    protected function isApproved(BaseResponse $response): bool
+    {
+        return Str::contains((string) $response->status, 'APPROVED', true);
     }
 }

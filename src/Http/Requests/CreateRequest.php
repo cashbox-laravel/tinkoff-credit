@@ -14,26 +14,24 @@ class CreateRequest extends BaseRequest
 
     public function body(): array
     {
-        return [
-            'shopId'     => $this->resource->clientId(),
-            'showcaseId' => $this->resource->showcaseId(),
+        return array_merge([
+            'shopId'     => $this->resource->shopId(),
+            'showcaseId' => $this->resource->showCaseId(),
             'promoCode'  => $this->resource->promoCode(),
 
             'orderNumber' => $this->resource->paymentId(),
             'sum'         => $this->resource->sum(),
 
-            'values' => [
-                'contact' => [
-                    'lastName'   => $this->resource->lastName(),
-                    'firstName'  => $this->resource->firstName(),
-                    'middleName' => $this->resource->middleName(),
-                ],
+            'items' => $this->resource->productItems(),
+        ], $this->userContact());
+    }
 
-                'mobilePhone' => $this->resource->phone(),
-                'email'       => $this->resource->email(),
-            ],
+    protected function userContact(): array
+    {
+        if ($contact = $this->resource->contact()) {
+            return ['values' => ['contact' => $contact]];
+        }
 
-            'items' => $this->resource->items(),
-        ];
+        return [];
     }
 }
