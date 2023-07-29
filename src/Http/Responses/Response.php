@@ -30,7 +30,7 @@ class Response extends BaseResponse
         ]);
     }
 
-    protected function getExtra(): ?array
+    protected function getExtra(): array
     {
         return [
             'status' => $this->status,
