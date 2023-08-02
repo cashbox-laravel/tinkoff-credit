@@ -65,16 +65,10 @@
         "branch-alias": {
             "dev-main": "4.x-dev"
         },
-        "thanks": [
-            {
-                "name": "cashbox/core",
-                "url": "https://github.com/cashbox-laravel/core"
-            },
-            {
-                "name": "psr/http-message",
-                "url": "https://github.com/php-fig/http-message"
-            }
-        ],
+        "thanks": {
+            "name": "cashbox/docs",
+            "url": "https://github.com/cashbox-laravel/foundation"
+        },
         "title": "Tinkoff Credit Driver"
     }
 }
