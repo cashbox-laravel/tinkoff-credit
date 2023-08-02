@@ -17,19 +17,27 @@ class CreateRequest extends BaseRequest
         return array_merge([
             'shopId'     => $this->resource->shopId(),
             'showcaseId' => $this->resource->showCaseId(),
-            'promoCode'  => $this->resource->promoCode(),
 
             'orderNumber' => $this->resource->paymentId(),
             'sum'         => $this->resource->sum(),
 
             'items' => $this->resource->productItems(),
-        ], $this->userContact());
+        ], $this->userContact(), $this->promoCode());
     }
 
     protected function userContact(): array
     {
         if ($contact = $this->resource->contact()) {
             return ['values' => ['contact' => $contact]];
+        }
+
+        return [];
+    }
+
+    protected function promoCode(): array
+    {
+        if ($code = $this->resource->promoCode()) {
+            return ['promoCode' => $code];
         }
 
         return [];

@@ -27,8 +27,8 @@ abstract class TinkoffCreditResource extends Resource
         return $this->config->credentials->extra['showcase_id'] ?? null;
     }
 
-    public function promoCode(): string
+    public function promoCode(): ?string
     {
-        return $this->config->credentials->extra['promo_code'] ?? 'default';
+        return $this->config->credentials->extra['promo_code'] ?? null;
     }
 }

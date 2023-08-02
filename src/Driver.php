@@ -35,6 +35,11 @@ class Driver extends BaseDriver
 
     protected string $response = Response::class;
 
+    protected array $commitStatuses = [
+        'signed',
+        'issued',
+    ];
+
     public function start(): BaseResponse
     {
         return $this->request(CreateRequest::class, CreatedResponse::class);
@@ -49,15 +54,15 @@ class Driver extends BaseDriver
     {
         $response = $this->request(GetStateRequest::class);
 
-        if ($this->isApproved($response)) {
+        if ($this->toCommit($response)) {
             return $this->request(CommitRequest::class);
         }
 
         return $response;
     }
 
-    protected function isApproved(BaseResponse $response): bool
+    protected function toCommit(BaseResponse $response): bool
     {
-        return Str::contains((string) $response->status, 'APPROVED', true);
+        return Str::contains((string) $response->status, $this->commitStatuses, true);
     }
 }
