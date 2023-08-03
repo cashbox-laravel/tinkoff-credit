@@ -10,7 +10,7 @@ class CreateRequest extends BaseRequest
 
     protected ?string $devUri = '/api/partners/v2/orders/create-demo';
 
-    protected bool $hash = false;
+    protected bool $secure = false;
 
     public function body(): array
     {

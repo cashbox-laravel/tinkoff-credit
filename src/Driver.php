@@ -45,11 +45,6 @@ class Driver extends BaseDriver
         return $this->request(CreateRequest::class, CreatedResponse::class);
     }
 
-    public function refund(): BaseResponse
-    {
-        return $this->request(CancelRequest::class);
-    }
-
     public function verify(): BaseResponse
     {
         $response = $this->request(GetStateRequest::class);
@@ -59,6 +54,11 @@ class Driver extends BaseDriver
         }
 
         return $response;
+    }
+
+    public function refund(): BaseResponse
+    {
+        return $this->request(CancelRequest::class);
     }
 
     protected function toCommit(BaseResponse $response): bool

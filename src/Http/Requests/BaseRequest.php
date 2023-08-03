@@ -23,7 +23,7 @@ abstract class BaseRequest extends Request
 
     public function options(): array
     {
-        if ($this->hash) {
+        if ($this->secure) {
             return [
                 'auth' => [
                     $this->clientId(),
