@@ -27,6 +27,8 @@ abstract class BaseRequest extends Request
 {
     protected string $productionHost = 'https://forma.tinkoff.ru';
 
+    protected bool $secure = false;
+
     public function url(): ?string
     {
         return Str::replaceFormat(parent::url(), [
