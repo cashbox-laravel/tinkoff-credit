@@ -19,7 +19,7 @@ namespace Cashbox\Tinkoff\Credit\Http\Requests;
 
 use Cashbox\Core\Http\Request;
 use Cashbox\Core\Services\Auth;
-use Cashbox\Tinkoff\Auth\BasicAuth;
+use Cashbox\Tinkoff\Auth\Basic;
 use DragonCode\Support\Facades\Helpers\Str;
 
 /**
@@ -29,7 +29,7 @@ abstract class BaseRequest extends Request
 {
     protected string $productionHost = 'https://forma.tinkoff.ru';
 
-    protected Auth|string|null $auth = BasicAuth::class;
+    protected Auth|string|null $auth = Basic::class;
 
     public function url(): ?string
     {
