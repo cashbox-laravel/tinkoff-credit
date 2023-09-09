@@ -18,6 +18,8 @@ declare(strict_types=1);
 namespace Cashbox\Tinkoff\Credit\Http\Requests;
 
 use Cashbox\Core\Http\Request;
+use Cashbox\Core\Services\Auth;
+use Cashbox\Tinkoff\Auth\BasicAuth;
 use DragonCode\Support\Facades\Helpers\Str;
 
 /**
@@ -27,27 +29,13 @@ abstract class BaseRequest extends Request
 {
     protected string $productionHost = 'https://forma.tinkoff.ru';
 
-    protected bool $secure = false;
+    protected Auth|string|null $auth = BasicAuth::class;
 
     public function url(): ?string
     {
         return Str::replaceFormat(parent::url(), [
             'orderNumber' => $this->resource->paymentId(),
         ], '{%s}');
-    }
-
-    public function options(): array
-    {
-        if ($this->secure) {
-            return [
-                'auth' => [
-                    $this->clientId(),
-                    $this->clientSecret(),
-                ],
-            ];
-        }
-
-        return [];
     }
 
     protected function clientId(): string
