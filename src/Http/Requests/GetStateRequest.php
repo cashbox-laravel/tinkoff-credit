@@ -21,7 +21,7 @@ use Cashbox\Core\Enums\HttpMethodEnum;
 
 class GetStateRequest extends BaseRequest
 {
-    public HttpMethodEnum $method = HttpMethodEnum::get;
+    public HttpMethodEnum $method = HttpMethodEnum::Get;
 
     protected string $productionUri = '/api/partners/v2/orders/{orderNumber}/info';
 
